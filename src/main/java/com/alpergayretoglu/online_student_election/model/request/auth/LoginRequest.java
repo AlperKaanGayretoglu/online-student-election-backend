@@ -15,7 +15,7 @@ public class LoginRequest {
 
     @NotBlank
     @Email
-    private String username;
+    private String email;
 
     @NotBlank
     @Size(min = ApplicationConstants.PASSWORD_MIN_LENGTH, max = ApplicationConstants.PASSWORD_MAX_LENGTH)
