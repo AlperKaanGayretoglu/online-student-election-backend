@@ -3,6 +3,7 @@ package com.alpergayretoglu.online_student_election.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class FilterChainConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
+    private final SelfFilter selfFilter;
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
@@ -27,14 +29,19 @@ public class FilterChainConfig {
                 .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/swagger-ui/index.html").permitAll()  // OpenAPI
                 .requestMatchers("/v3/api-docs").permitAll()            // OpenAPI
-                // .anyRequest().authenticated() // security ON
-                .anyRequest().permitAll() // security OFF
+                .requestMatchers("/user/admin-or-self-test/**") // FOR TESTING PURPOSES, TODO : remove later
+                .hasAnyAuthority("ADMIN", "SELF")
+                .requestMatchers(HttpMethod.GET, "/user").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/user/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated() // security ON
+                // .anyRequest().permitAll() // security OFF
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(selfFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, SelfFilter.class);
 
         return http.build();
     }
