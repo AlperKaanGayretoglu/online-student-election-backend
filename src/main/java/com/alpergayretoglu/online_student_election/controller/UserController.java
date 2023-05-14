@@ -1,6 +1,5 @@
 package com.alpergayretoglu.online_student_election.controller;
 
-import com.alpergayretoglu.online_student_election.model.request.user.UserCreateRequest;
 import com.alpergayretoglu.online_student_election.model.request.user.UserUpdateRequest;
 import com.alpergayretoglu.online_student_election.model.response.UserResponse;
 import com.alpergayretoglu.online_student_election.service.UserService;
@@ -18,18 +17,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<UserResponse> getUsers() {
+    public List<UserResponse> listUsers() {
         return userService.getUsers().stream().map(UserResponse::fromEntity).toList();
     }
 
     @GetMapping("{userId}")
     public UserResponse getUser(@PathVariable String userId) {
         return UserResponse.fromEntity(userService.getUser(userId));
-    }
-
-    @PostMapping
-    public UserResponse addUser(@Valid @RequestBody UserCreateRequest request) {
-        return UserResponse.fromEntity(userService.addUser(request));
     }
 
     @PutMapping("{userId}")
@@ -44,10 +38,8 @@ public class UserController {
 
 
     // ADMIN or SELF authorization testing route, TODO: SELF DOESN'T WORK!!! (problem with SelfFilter!!!)
-    /*
     @GetMapping("/admin-or-self-test/{userId}")
-    public String adminOrSelfResource(@PathVariable String userId) {
-        return "You have reached protected resource.";
+    public UserResponse adminOrSelfResource(@PathVariable String userId) {
+        return UserResponse.fromEntity(userService.getUser(userId));
     }
-     */
 }

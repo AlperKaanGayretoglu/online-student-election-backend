@@ -9,10 +9,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     public Optional<User> findByEmail(String email);
 
-    public Optional<User> findByVerificationCode(String verificationCode);
-
-    public Optional<User> findByRecoveryCode(String recoveryCode);
-
     public boolean existsByEmail(String email); // TODO: Check if this works !!!
 
 }

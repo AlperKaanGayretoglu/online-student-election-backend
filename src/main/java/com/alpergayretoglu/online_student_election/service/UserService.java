@@ -2,8 +2,6 @@ package com.alpergayretoglu.online_student_election.service;
 
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
 import com.alpergayretoglu.online_student_election.model.entity.User;
-import com.alpergayretoglu.online_student_election.model.enums.UserRole;
-import com.alpergayretoglu.online_student_election.model.request.user.UserCreateRequest;
 import com.alpergayretoglu.online_student_election.model.request.user.UserUpdateRequest;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -18,21 +16,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public User addUser(UserCreateRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists"); // TODO make specific exception
-        }
-
-        return userRepository.save(User.builder()
-                .name(request.getName())
-                .surname(request.getSurname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(UserRole.VOTER) // default
-                .build()
-        );
-    }
 
     public List<User> getUsers() {
         return userRepository.findAll();
