@@ -29,8 +29,9 @@ public class FilterChainConfig {
                 .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/swagger-ui/index.html").permitAll()  // OpenAPI
                 .requestMatchers("/v3/api-docs").permitAll()            // OpenAPI
-                .requestMatchers("/user/admin-or-self-test/**") // FOR TESTING PURPOSES, TODO : remove later
-                .hasAnyAuthority("ADMIN", "SELF")
+
+                .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("ADMIN", "SELF")
+
                 .requestMatchers(HttpMethod.GET, "/user").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/user/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated() // security ON
