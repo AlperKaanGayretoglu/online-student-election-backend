@@ -17,18 +17,23 @@ public class Election {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
     private ElectionType type;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private Boolean isFinished;
+    private LocalDate endDate;
 
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean isFinished = false;
+
+    @Builder.Default
     @ManyToOne
-    private User winner;
+    private User winner = null;
 }
