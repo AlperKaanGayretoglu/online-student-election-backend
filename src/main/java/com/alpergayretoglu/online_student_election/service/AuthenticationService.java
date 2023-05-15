@@ -3,7 +3,7 @@ package com.alpergayretoglu.online_student_election.service;
 import com.alpergayretoglu.online_student_election.model.entity.ObsUser;
 import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
-import com.alpergayretoglu.online_student_election.model.request.auth.LoginRequest;
+import com.alpergayretoglu.online_student_election.model.request.LoginRequest;
 import com.alpergayretoglu.online_student_election.model.response.AuthenticationResponse;
 import com.alpergayretoglu.online_student_election.repository.ObsUserRepository;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;

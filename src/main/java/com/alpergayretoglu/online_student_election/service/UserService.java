@@ -2,7 +2,7 @@ package com.alpergayretoglu.online_student_election.service;
 
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
 import com.alpergayretoglu.online_student_election.model.entity.User;
-import com.alpergayretoglu.online_student_election.model.request.user.UserUpdateRequest;
+import com.alpergayretoglu.online_student_election.model.request.UserUpdateRequest;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

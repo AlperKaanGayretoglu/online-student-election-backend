@@ -1,6 +1,6 @@
 package com.alpergayretoglu.online_student_election.controller;
 
-import com.alpergayretoglu.online_student_election.model.request.user.UserUpdateRequest;
+import com.alpergayretoglu.online_student_election.model.request.UserUpdateRequest;
 import com.alpergayretoglu.online_student_election.model.response.UserResponse;
 import com.alpergayretoglu.online_student_election.service.UserService;
 import jakarta.validation.Valid;
@@ -36,10 +36,4 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
-
-    // ADMIN or SELF authorization testing route, TODO: SELF DOESN'T WORK!!! (problem with SelfFilter!!!)
-    @GetMapping("/admin-or-self-test/{userId}")
-    public UserResponse adminOrSelfResource(@PathVariable String userId) {
-        return UserResponse.fromEntity(userService.getUser(userId));
-    }
 }

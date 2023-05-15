@@ -1,6 +1,6 @@
 package com.alpergayretoglu.online_student_election.controller;
 
-import com.alpergayretoglu.online_student_election.model.request.auth.LoginRequest;
+import com.alpergayretoglu.online_student_election.model.request.LoginRequest;
 import com.alpergayretoglu.online_student_election.model.response.AuthenticationResponse;
 import com.alpergayretoglu.online_student_election.service.AuthenticationService;
 import jakarta.validation.Valid;
