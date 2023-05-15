@@ -1,5 +1,6 @@
 package com.alpergayretoglu.online_student_election.service;
 
+import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
 import com.alpergayretoglu.online_student_election.model.entity.Election;
 import com.alpergayretoglu.online_student_election.model.request.ElectionCreateRequest;
@@ -18,7 +19,7 @@ public class ElectionService {
 
     public Election addElection(ElectionCreateRequest request) {
         if (electionRepository.existsByName(request.getName())) {
-            throw new RuntimeException("An election with that name already exists"); // TODO make specific exception
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_NAME_ALREADY_EXISTS); // TODO make specific exception
         }
 
         return electionRepository.save(ElectionCreateRequest.toEntity(request));
@@ -36,7 +37,7 @@ public class ElectionService {
         Election oldElection = getElectionWithException(id);
 
         if (oldElection.getIsFinished()) {
-            throw new RuntimeException("Election is finished, cannot update"); // TODO make specific exception
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_ELECTION_FINISHED); // TODO make specific exception
         }
 
         oldElection.setName(request.getName());

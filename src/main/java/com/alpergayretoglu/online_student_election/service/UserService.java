@@ -5,7 +5,6 @@ import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.request.UserUpdateRequest;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public List<User> getUsers() {
         return userRepository.findAll();

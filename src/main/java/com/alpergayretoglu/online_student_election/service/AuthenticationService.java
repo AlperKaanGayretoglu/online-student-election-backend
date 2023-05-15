@@ -1,5 +1,6 @@
 package com.alpergayretoglu.online_student_election.service;
 
+import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.model.entity.ObsUser;
 import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
@@ -35,20 +36,22 @@ public class AuthenticationService {
         );
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
-            throw new RuntimeException("Invalid Email"); // TODO: specific exception
+            // invalid email
+            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO: specific exception
         });
 
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             String token = jwtService.generateToken(user);
             return new AuthenticationResponse(token);
         }
-
-        throw new RuntimeException("Invalid Password"); // TODO specific exception
+        // invalid password
+        throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO specific exception
     }
 
     private AuthenticationResponse register(LoginRequest request) {
         ObsUser obsUser = obsUserRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
-            throw new RuntimeException("Invalid Email"); // TODO: specific exception
+            // invalid email
+            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO: specific exception
         });
 
         User user = User.builder()
@@ -63,6 +66,5 @@ public class AuthenticationService {
         String jwtToken = jwtService.generateToken(response);
         return new AuthenticationResponse(jwtToken);
     }
-
 
 }
