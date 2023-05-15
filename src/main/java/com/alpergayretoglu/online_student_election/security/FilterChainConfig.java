@@ -25,15 +25,15 @@ public class FilterChainConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/swagger-ui/index.html").permitAll()  // OpenAPI
                 .requestMatchers("/v3/api-docs").permitAll()            // OpenAPI
 
-                .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("ADMIN", "SELF")
+                .requestMatchers("/auth/login").permitAll()
 
-                .requestMatchers(HttpMethod.GET, "/user").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/user/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("ADMIN", "SELF")
+                .requestMatchers("/user").hasAuthority("ADMIN")
+                .requestMatchers("/user/**").hasAuthority("ADMIN")
+
                 .anyRequest().authenticated() // security ON
                 // .anyRequest().permitAll() // security OFF
                 .and()
