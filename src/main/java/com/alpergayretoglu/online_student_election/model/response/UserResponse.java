@@ -5,19 +5,16 @@ import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.CandidateType;
 import com.alpergayretoglu.online_student_election.model.enums.RepresentativeType;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserResponse {
-
     private String id;
     private String name;
     private String surname;

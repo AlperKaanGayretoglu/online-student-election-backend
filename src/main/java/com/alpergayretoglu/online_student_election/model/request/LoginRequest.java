@@ -1,4 +1,4 @@
-package com.alpergayretoglu.online_student_election.model.request.auth;
+package com.alpergayretoglu.online_student_election.model.request;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationConstants;
 import jakarta.validation.constraints.Email;

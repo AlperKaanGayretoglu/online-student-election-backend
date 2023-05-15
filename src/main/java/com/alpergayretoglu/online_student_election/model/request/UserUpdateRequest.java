@@ -1,4 +1,4 @@
-package com.alpergayretoglu.online_student_election.model.request.user;
+package com.alpergayretoglu.online_student_election.model.request;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationConstants;
 import com.alpergayretoglu.online_student_election.model.entity.User;
@@ -6,11 +6,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
 @Builder
-public class UserCreateRequest {
+@Getter
+@Setter
+public class UserUpdateRequest {
 
     @NotBlank
     private String name;
@@ -26,7 +29,7 @@ public class UserCreateRequest {
     @Size(min = ApplicationConstants.PASSWORD_MIN_LENGTH, max = ApplicationConstants.PASSWORD_MAX_LENGTH)
     private String password;
 
-    public static User toEntity(UserCreateRequest request) {
+    public static User toEntity(UserUpdateRequest request) {
         return User.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
