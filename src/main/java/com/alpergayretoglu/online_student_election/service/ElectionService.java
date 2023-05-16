@@ -2,6 +2,7 @@ package com.alpergayretoglu.online_student_election.service;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
+import com.alpergayretoglu.online_student_election.model.entity.Department;
 import com.alpergayretoglu.online_student_election.model.entity.Election;
 import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.entity.Vote;
@@ -10,6 +11,7 @@ import com.alpergayretoglu.online_student_election.model.enums.UserRole;
 import com.alpergayretoglu.online_student_election.model.request.ElectionCreateRequest;
 import com.alpergayretoglu.online_student_election.model.request.ElectionUpdateRequest;
 import com.alpergayretoglu.online_student_election.model.request.VoteCastingRequest;
+import com.alpergayretoglu.online_student_election.repository.DepartmentRepository;
 import com.alpergayretoglu.online_student_election.repository.ElectionRepository;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import com.alpergayretoglu.online_student_election.repository.VoteRepository;
@@ -25,6 +27,7 @@ import java.util.List;
 public class ElectionService {
 
     private final ElectionRepository electionRepository;
+    private final DepartmentRepository departmentRepository;
     private final UserRepository userRepository;
     private final VoteRepository voteRepository;
 
@@ -86,9 +89,14 @@ public class ElectionService {
 
         User winner = election.decideWinner();
         winner.setRole(UserRole.REPRESENTATIVE);
+
         election.setWinner(winner);
         election.setIsFinished(true);
         electionRepository.save(election);
+
+        Department department = election.getDepartment();
+        department.setRepresentative(winner);
+        departmentRepository.save(department);
 
         return ApplicationMessages.ELECTION_END_SUCCESS;
     }
@@ -98,7 +106,7 @@ public class ElectionService {
         User voter = userRepository.findById(voteCastingRequest.getVoterId()).orElseThrow(() -> {
             throw new EntityNotFoundException();
         });
-        Election election = getElectionWithException(voteCastingRequest.getElectionId());
+        Election election = getElectionWithException(electionId);
         User candidate = election.getCandidates().stream()
                 .filter(cand -> cand.getId().equals(voteCastingRequest.getCandidateId()))
                 .findFirst().orElse(null);
