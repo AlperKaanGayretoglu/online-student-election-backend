@@ -33,6 +33,8 @@ public class ObsUser {
 
     // STUDENT
     // -------------------------------------------------------
+    private String tcNo;
+
     private String studentNo;
 
     private Double gpa;
