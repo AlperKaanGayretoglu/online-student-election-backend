@@ -17,6 +17,10 @@ public class Department {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @OneToOne
+    @Builder.Default
+    private User representative = null;
+
     @ManyToOne
     private Faculty faculty;
 
