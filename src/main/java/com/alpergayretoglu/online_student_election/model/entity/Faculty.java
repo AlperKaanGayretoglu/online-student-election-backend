@@ -14,6 +14,6 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 }
