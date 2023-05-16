@@ -1,7 +1,5 @@
 package com.alpergayretoglu.online_student_election.model.entity;
 
-import com.alpergayretoglu.online_student_election.model.enums.CandidateType;
-import com.alpergayretoglu.online_student_election.model.enums.RepresentativeType;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -42,33 +39,21 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private UserRole role = UserRole.VOTER;
+    private UserRole role = UserRole.VOTER; // this will determine whether the user is a candidate or a representative
     // -------------------------------------------------------
-
 
     // STUDENT
     // -------------------------------------------------------
+    private String tcNo;
+    
     private String studentNo;
 
     private Double gpa;
 
     @ManyToOne
-    private Department department;
+    private Department department; // a user can only be candidate/representative for the department he/she is in
     // -------------------------------------------------------
 
-    // CANDIDATE
-    // -------------------------------------------------------
-    private CandidateType candidateType;
-    // -------------------------------------------------------
-
-    // REPRESENTATIVE
-    // -------------------------------------------------------
-    private RepresentativeType representativeType;
-
-    private LocalDate representativeStartDate;
-
-    private LocalDate representativeEndDate;
-    // -------------------------------------------------------
 
     // SECURITY
     // -------------------------------------------------------
