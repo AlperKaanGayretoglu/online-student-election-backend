@@ -2,10 +2,11 @@ package com.alpergayretoglu.online_student_election.model.response;
 
 import com.alpergayretoglu.online_student_election.model.entity.Election;
 import com.alpergayretoglu.online_student_election.model.entity.User;
-import com.alpergayretoglu.online_student_election.model.enums.ElectionType;
+import com.alpergayretoglu.online_student_election.model.enums.Term;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @Builder
@@ -15,21 +16,29 @@ import java.time.LocalDate;
 public class ElectionResponse {
     private String id;
     private String name;
-    private ElectionType type;
+    private String departmentName;
+    private Term term;
+    private Integer year;
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean isFinished;
-    private User winner;
+    private String winnerName;
+    private List<String> candidateNames;
 
     public static ElectionResponse fromEntity(Election election) {
+        User winner = election.getWinner();
+        String winnerName = winner == null ? null : winner.getName();
         return ElectionResponse.builder()
                 .id(election.getId())
                 .name(election.getName())
-                .type(election.getType())
+                .departmentName(election.getDepartment().getName())
+                .term(election.getTerm())
+                .year(election.getYear())
                 .startDate(election.getStartDate())
                 .endDate(election.getEndDate())
                 .isFinished(election.getIsFinished())
-                .winner(election.getWinner())
+                .winnerName(winnerName)
+                .candidateNames(election.getCandidates().stream().map(User::getName).toList())
                 .build();
     }
 }

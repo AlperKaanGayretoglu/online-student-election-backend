@@ -1,8 +1,9 @@
 package com.alpergayretoglu.online_student_election.model.request;
 
 
+import com.alpergayretoglu.online_student_election.model.entity.Department;
 import com.alpergayretoglu.online_student_election.model.entity.Election;
-import com.alpergayretoglu.online_student_election.model.enums.ElectionType;
+import com.alpergayretoglu.online_student_election.model.enums.Term;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,13 @@ public class ElectionCreateRequest {
     private String name;
 
     @NotBlank
-    private ElectionType type;
+    private Department department;
+
+    @NotBlank
+    private Term term;
+
+    @NotBlank
+    private Integer year;
 
     @NotBlank
     private LocalDate startDate;
@@ -30,7 +37,9 @@ public class ElectionCreateRequest {
     public static Election toEntity(ElectionCreateRequest request) {
         return Election.builder()
                 .name(request.getName())
-                .type(request.getType())
+                .department(request.getDepartment())
+                .term(request.getTerm())
+                .year(request.getYear())
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .isFinished(false)
