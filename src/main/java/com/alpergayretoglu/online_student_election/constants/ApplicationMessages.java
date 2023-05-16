@@ -25,7 +25,7 @@ public class ApplicationMessages {
     public static final String RE_ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE = "Start date cannot come after the end date of an election";
     public static final String RE_ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE = "Start date cannot come before the current date";
 
-    public static final String ELECTION_END_SUCCESS = "The election has ended, abd the results have been announced";
+    public static final String ELECTION_END_SUCCESS = "The election has ended, and the results have been announced";
 
     public static final String CANDIDATE_APPLICATION_SUBMIT_SUCCESS = "Submission was successful";
     public static final String CANDIDATE_APPLICATION_STATUS_ACCEPTED = "Your application has been accepted; you are a candidate now";
@@ -42,5 +42,16 @@ public class ApplicationMessages {
 
     // EXTRA MESSAGES
     public static final String ELECTION_CREATE_FAIL_ELECTION_FINISHED = "Election is finished, cannot update";
+
+    public static final String ELECTION_END_FAIL_ELECTION_ALREADY_FINISHED = "This election has already finished";
+
+    public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION = "There is no election for your department yet.";
+    public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE = "You are already a candidate.";
+    public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NOT_ELIGIBLE = "You are not eligible for candidacy.";
+
+    public static final String VOTE_SUBMIT_FAIL_ALREADY_VOTED = "You have already voted";
+    public static final String VOTE_SUBMIT_FAIL_INVALID_CANDIDATE = "The candidate you have chosen is not valid";
+
+    public static final String CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE = "You are not a candidate";
 
 }
