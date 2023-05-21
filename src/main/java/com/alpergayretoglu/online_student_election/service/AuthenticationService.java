@@ -42,7 +42,7 @@ public class AuthenticationService {
 
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             String token = jwtService.generateToken(user);
-            return new AuthenticationResponse(token);
+            return new AuthenticationResponse(token, user.getId(), user.getName(), user.getSurname());
         }
         // invalid password
         throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO specific exception
@@ -64,7 +64,7 @@ public class AuthenticationService {
 
         User response = userRepository.save(user);
         String jwtToken = jwtService.generateToken(response);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, response.getId(), response.getName(), response.getSurname());
     }
 
 }
