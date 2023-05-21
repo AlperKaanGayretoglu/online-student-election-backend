@@ -22,7 +22,7 @@ public class FilterChainConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/swagger-ui/index.html").permitAll()  // OpenAPI
