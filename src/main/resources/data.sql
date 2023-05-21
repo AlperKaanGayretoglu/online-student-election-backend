@@ -75,47 +75,47 @@ VALUES (gen_random_uuid(), '00000000004', 'Ali', 'Kaya', false, false, false);
 ---------------------------------------------------------------------------------- ObsUserRepository ----------------------------------------------------------------------------------
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name) -- USER
 VALUES (gen_random_uuid(), 'USER', 'USER', 'user@mail.com',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', '000000000', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000000', 4.0, 'Computer Engineering');
 
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
 VALUES (gen_random_uuid(), 'Tuğçe', 'Türkmenler', 'tugceturkmenler@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', '000000001', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000001', 4.0, 'Computer Engineering');
 
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
 VALUES (gen_random_uuid(), 'Kerem Yavuz', 'Şenyurt', 'keremsenyurt@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', '000000002', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000002', 4.0, 'Computer Engineering');
 
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
 VALUES (gen_random_uuid(), 'Aylin', 'Kocaman', 'aylinkocaman@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', '000000003', 4.0, 'Chemical Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000003', 4.0, 'Chemical Engineering');
 
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
 VALUES (gen_random_uuid(), 'Ali', 'Kaya', 'alikaya@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', '000000004', 4.0, 'Chemical Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000004', 4.0, 'Chemical Engineering');
 
 ---------------------------------------------------------------------------------- UserRepository ----------------------------------------------------------------------------------
 INSERT INTO users (id, name, surname, email, password, role) -- ADMIN
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc871', 'ADMIN', 'ADMIN', 'admin@mail.com',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', 'ADMIN');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'ADMIN');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc878', 'Tuğçe', 'Türkmenler', 'tugceturkmenler@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', 'REPRESENTATIVE', '00000000001', '000000001',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'REPRESENTATIVE', '00000000001', '000000001',
         4.0, '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc879', 'Kerem Yavuz', 'Şenyurt', 'keremsenyurt@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', 'VOTER', '00000000002', '000000002', 4.0,
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'VOTER', '00000000002', '000000002', 4.0,
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cac878', 'Aylin', 'Kocaman', 'aylinkocaman@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', 'CANDIDATE', '00000000003', '000000003',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'CANDIDATE', '00000000003', '000000003',
         4.0, '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cac879', 'Ali', 'Kaya', 'alikaya@std.iyte.edu.tr',
-        '$2a$10$OU9/JC80FudcjfuAj1.X5OopuhG6Trs3JHQEOHdH.Xnm7VSIpW0OC', 'CANDIDATE', '00000000004', '000000004', 4.0,
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'CANDIDATE', '00000000004', '000000004', 4.0,
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987');
 
 ---------------------------------------------------------------------------------- ElectionRepository ----------------------------------------------------------------------------------
