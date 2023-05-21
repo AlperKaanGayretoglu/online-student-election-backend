@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/election")
 @AllArgsConstructor
+@CrossOrigin
 public class ElectionController {
 
     private ElectionService electionService;
