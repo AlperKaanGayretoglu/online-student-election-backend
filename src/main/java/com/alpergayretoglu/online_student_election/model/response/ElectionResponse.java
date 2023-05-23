@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Builder
@@ -38,7 +39,7 @@ public class ElectionResponse {
                 .endDate(election.getEndDate())
                 .isFinished(election.getIsFinished())
                 .winnerName(winnerName)
-                .candidateNames(election.getCandidates().stream().map(User::getName).toList())
+                .candidateNames(election.getCandidates().stream().map(User::getName).collect(Collectors.toList()))
                 .build();
     }
 }

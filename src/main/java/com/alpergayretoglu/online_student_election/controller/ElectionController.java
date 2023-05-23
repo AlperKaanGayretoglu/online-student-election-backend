@@ -6,11 +6,12 @@ import com.alpergayretoglu.online_student_election.model.request.VoteCastingRequ
 import com.alpergayretoglu.online_student_election.model.response.ElectionResponse;
 import com.alpergayretoglu.online_student_election.model.response.ElectionResultResponse;
 import com.alpergayretoglu.online_student_election.service.ElectionService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/election")
@@ -22,7 +23,7 @@ public class ElectionController {
 
     @GetMapping
     public List<ElectionResponse> listElections() {
-        return electionService.getElections().stream().map(ElectionResponse::fromEntity).toList();
+        return electionService.getElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("{electionId}")
@@ -58,12 +59,12 @@ public class ElectionController {
 
     @GetMapping("/current_term")
     public List<ElectionResponse> getAllElectionsForCurrentTerm() {
-        return electionService.getAllElectionsForCurrentTerm().stream().map(ElectionResponse::fromEntity).toList();
+        return electionService.getAllElectionsForCurrentTerm().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("/current_term_results")
     public List<ElectionResultResponse> getElectionResultsForCurrentTerm() {
-        return electionService.getAllElectionsForCurrentTerm().stream().map(ElectionResultResponse::fromEntity).toList();
+        return electionService.getAllElectionsForCurrentTerm().stream().map(ElectionResultResponse::fromEntity).collect(Collectors.toList());
     }
 
 }

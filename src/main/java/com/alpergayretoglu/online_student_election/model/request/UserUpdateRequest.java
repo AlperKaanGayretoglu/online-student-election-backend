@@ -2,12 +2,13 @@ package com.alpergayretoglu.online_student_election.model.request;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationConstants;
 import com.alpergayretoglu.online_student_election.model.entity.User;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 @Builder

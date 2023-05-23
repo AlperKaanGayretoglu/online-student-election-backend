@@ -1,14 +1,14 @@
 package com.alpergayretoglu.online_student_election.model.entity;
 
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
-import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 @Entity
 @Table(name = "users")
@@ -17,14 +17,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
     // USER
     // -------------------------------------------------------
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
-
     @Column(nullable = false)
     private String name;
 
@@ -45,7 +41,7 @@ public class User implements UserDetails {
     // STUDENT
     // -------------------------------------------------------
     private String tcNo;
-    
+
     private String studentNo;
 
     private Double gpa;
@@ -59,7 +55,7 @@ public class User implements UserDetails {
     // -------------------------------------------------------
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

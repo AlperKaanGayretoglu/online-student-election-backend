@@ -1,9 +1,10 @@
 package com.alpergayretoglu.online_student_election.model.request;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Builder
 @Getter

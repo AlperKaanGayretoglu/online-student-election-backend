@@ -1,9 +1,9 @@
 package com.alpergayretoglu.online_student_election.model.entity;
 
 import com.alpergayretoglu.online_student_election.model.enums.Term;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,10 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Election {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+public class Election extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String name;

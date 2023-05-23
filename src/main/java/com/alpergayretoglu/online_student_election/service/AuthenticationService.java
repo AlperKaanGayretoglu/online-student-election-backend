@@ -11,8 +11,6 @@ import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import com.alpergayretoglu.online_student_election.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +22,11 @@ public class AuthenticationService {
     private final ObsUserRepository obsUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse login(LoginRequest request) {
         if (!userRepository.existsByEmail(request.getEmail())) {
             return register(request);
         }
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
             // invalid email
@@ -41,7 +34,7 @@ public class AuthenticationService {
         });
 
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            String token = jwtService.generateToken(user);
+            String token = jwtService.createToken(user.getId());
             return new AuthenticationResponse(token, user.getId(), user.getName(), user.getSurname());
         }
         // invalid password
@@ -63,7 +56,7 @@ public class AuthenticationService {
                 .build();
 
         User response = userRepository.save(user);
-        String jwtToken = jwtService.generateToken(response);
+        String jwtToken = jwtService.createToken(response.getId());
         return new AuthenticationResponse(jwtToken, response.getId(), response.getName(), response.getSurname());
     }
 

@@ -1,62 +1,74 @@
 package com.alpergayretoglu.online_student_election.security;
 
-import com.alpergayretoglu.online_student_election.model.entity.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import com.alpergayretoglu.online_student_election.config.SecurityConfig;
+import com.alpergayretoglu.online_student_election.repository.UserRepository;
+import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
-    private final String SECRET_KEY;
-    private final String TOKEN_ISSUER;
-    private final int EXPIRE_HOURS; // token expires in given hours
+    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    public JwtService(SecurityConstants securityConstants) {
-        SECRET_KEY = securityConstants.getJWT_SECRET_KEY();
-        TOKEN_ISSUER = securityConstants.getJWT_TOKEN_ISSUER();
-        EXPIRE_HOURS = securityConstants.getJWT_EXPIRATION_HOURS();
+    private final SecurityConfig securityConfig;
+
+    @Autowired
+    public JwtService(SecurityConfig securityConfig, UserRepository userRepository) {
+        this.securityConfig = securityConfig;
     }
 
-    public Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
+    public Authentication verifyToken(String token, HttpServletRequest request) {
+        if (StringUtils.isNotEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+            try {
+                byte[] signingKey = securityConfig.getJwtSecret().getBytes();
+
+                Jws<Claims> parsedToken = Jwts.parser()
+                        .setSigningKey(signingKey)
+                        .parseClaimsJws(token.replace("Bearer ", ""));
+
+                String subject = parsedToken
+                        .getBody()
+                        .getSubject();
+
+                if (StringUtils.isNotEmpty(subject)) {
+                    return new UsernamePasswordAuthenticationToken(subject, null, null);
+                }
+            } catch (ExpiredJwtException exception) {
+                logger.warn("Request to parse expired JWT : {} failed : {}", token, exception.getMessage());
+            } catch (UnsupportedJwtException exception) {
+                logger.warn("Request to parse unsupported JWT : {} failed : {}", token, exception.getMessage());
+            } catch (MalformedJwtException exception) {
+                logger.warn("Request to parse invalid JWT : {} failed : {}", token, exception.getMessage());
+            } catch (SignatureException exception) {
+                logger.warn("Request to parse JWT with invalid signature : {} failed : {}", token, exception.getMessage());
+            } catch (IllegalArgumentException exception) {
+                logger.warn("Request to parse empty or null JWT : {} failed : {}", token, exception.getMessage());
+            }
+        }
+        return null;
     }
 
-    public String generateToken(User user) {
-        return generateToken(user.getUsername());
-    }
-
-    public String generateToken(String username) {
+    public String createToken(String subject) {
+        byte[] signingKey = securityConfig.getJwtSecret().getBytes(StandardCharsets.UTF_8);
         return Jwts.builder()
-                .signWith(getSigningKey())
-                .setIssuer(TOKEN_ISSUER)
-                .setSubject(username)
+                .signWith(SignatureAlgorithm.HS512, signingKey)
+                .setHeaderParam("typ", SecurityConstants.TOKEN_TYPE)
+                .setIssuer(SecurityConstants.TOKEN_ISSUER)
+                .setAudience(SecurityConstants.TOKEN_AUDIENCE)
+                .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * EXPIRE_HOURS))
+                .setExpiration(new Date(System.currentTimeMillis() + 864000000))
                 .compact();
     }
 
-    /**
-     * Takes token from Bearer header and returns Jws parsed claims.
-     *
-     * @param authHeader whole header like "Bearer eyJhbGciOiJ.."
-     * @return Jws Parsed Claims
-     */
-    public Jws<Claims> verifyAuthHeader(String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
-
-        String token = authHeader.substring(7);
-
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token);
-    }
 }

@@ -1,20 +1,15 @@
 package com.alpergayretoglu.online_student_election.security;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-
-
-@Configuration
-@Getter
 public class SecurityConstants {
 
-    @Value("${jwt.secret}")
-    private String JWT_SECRET_KEY;
+    // JWT token defaults
+    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String TOKEN_TYPE = "JWT";
+    public static final String TOKEN_ISSUER = "gguidesapi";
+    public static final String TOKEN_AUDIENCE = "gguidesapi";
 
-    @Value("${jwt.issuer}")
-    private String JWT_TOKEN_ISSUER;
+    private SecurityConstants() {
+    }
 
-    @Value("${jwt.expiration.hours}")
-    private int JWT_EXPIRATION_HOURS;
 }

@@ -1,7 +1,9 @@
 package com.alpergayretoglu.online_student_election.model.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
 @AllArgsConstructor
@@ -9,13 +11,10 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EdevletUser {
+public class EdevletUser extends BaseEntity {
+
     // USER
     // -------------------------------------------------------
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
-
     @Column(unique = true, nullable = false)
     private String tcNo;
 

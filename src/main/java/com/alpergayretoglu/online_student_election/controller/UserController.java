@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -17,7 +18,7 @@ public class UserController {
 
     @GetMapping
     public List<UserResponse> listUsers() {
-        return userService.getUsers().stream().map(UserResponse::fromEntity).toList();
+        return userService.getUsers().stream().map(UserResponse::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("{userId}")
