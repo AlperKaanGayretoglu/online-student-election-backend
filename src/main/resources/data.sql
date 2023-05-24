@@ -95,7 +95,7 @@ VALUES (gen_random_uuid(), 'Ali', 'Kaya', 'alikaya@std.iyte.edu.tr',
 
 ---------------------------------------------------------------------------------- UserRepository ----------------------------------------------------------------------------------
 INSERT INTO users (id, name, surname, email, password, role) -- ADMIN
-VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc871', 'ADMIN', 'ADMIN', 'admin@gmail.com',
+VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc871', 'ADMIN', 'ADMIN', 'admin@std.iyte.edu.tr',
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'ADMIN');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
