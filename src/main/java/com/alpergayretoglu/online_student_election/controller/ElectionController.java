@@ -52,9 +52,9 @@ public class ElectionController {
         return electionService.endElection(electionId);
     }
 
-    @PostMapping("{electionId}/cast-vote")
-    public String castVote(@PathVariable String electionId, VoteCastingRequest voteCastingRequest) {
-        return electionService.castVote(electionId, voteCastingRequest);
+    @PostMapping("cast-vote")
+    public String castVote(@Valid @RequestBody VoteCastingRequest voteCastingRequest) {
+        return electionService.castVote(voteCastingRequest);
     }
 
     @GetMapping("/current_term")
