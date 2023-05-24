@@ -36,7 +36,7 @@ public class ElectionService {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_NAME_ALREADY_EXISTS); // TODO make specific exception
         }
 
-        return electionRepository.save(ElectionCreateRequest.toEntity(request));
+        return electionRepository.save(ElectionCreateRequest.toEntity(request, departmentRepository));
     }
 
     public List<Election> getElections() {
@@ -102,11 +102,11 @@ public class ElectionService {
     }
 
 
-    public String castVote(String electionId, VoteCastingRequest voteCastingRequest) {
+    public String castVote(VoteCastingRequest voteCastingRequest) {
         User voter = userRepository.findById(voteCastingRequest.getVoterId()).orElseThrow(() -> {
             throw new EntityNotFoundException();
         });
-        Election election = getElectionWithException(electionId);
+        Election election = getElectionWithException(voteCastingRequest.getElectionId());
         User candidate = election.getCandidates().stream()
                 .filter(cand -> cand.getId().equals(voteCastingRequest.getCandidateId()))
                 .findFirst().orElse(null);
