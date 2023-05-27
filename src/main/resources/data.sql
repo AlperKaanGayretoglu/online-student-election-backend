@@ -27,7 +27,7 @@ VALUES (gen_random_uuid(), 'Bioengineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d6
 INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'Environmental Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
-VALUES (gen_random_uuid(), 'Energy Systems Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
+VALUES ('5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 'Energy Systems Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'Electrical-Electronics Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
@@ -52,9 +52,9 @@ INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'City and Regional Planning', '3426ca98-7afd-481e-91e6-315046570bef');
 
 ---------------------------------------------------------------------------------- EdevletUserRepository ----------------------------------------------------------------------------------
-INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record, -- USER
+INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record,
                           is_affiliated_withabad_organization)
-VALUES (gen_random_uuid(), '00000000000', 'USER', 'USER', false, false, false);
+VALUES (gen_random_uuid(), '00000000000', 'Efe', 'İncir', false, false, false);
 
 INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record,
                           is_affiliated_withabad_organization)
@@ -72,10 +72,22 @@ INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party
                           is_affiliated_withabad_organization)
 VALUES (gen_random_uuid(), '00000000004', 'Ali', 'Kaya', false, false, false);
 
+INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record,
+                          is_affiliated_withabad_organization)
+VALUES (gen_random_uuid(), '00000000005', 'Ahmet', 'Altın', false, false, false);
+
+INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record,
+                          is_affiliated_withabad_organization)
+VALUES (gen_random_uuid(), '00000000006', 'Mahmut', 'Gümüş', true, true, true);
+
+INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party_organ, hasacriminal_record,
+                          is_affiliated_withabad_organization)
+VALUES (gen_random_uuid(), '00000000007', 'Murat', 'Bronz', false, false, false);
+
 ---------------------------------------------------------------------------------- ObsUserRepository ----------------------------------------------------------------------------------
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name) -- USER
-VALUES (gen_random_uuid(), 'USER', 'USER', 'user@mail.com',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000000', 4.0, 'Computer Engineering');
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+VALUES (gen_random_uuid(), 'Efe', 'İncir', 'efeincir@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '290201097', 4.0, 'Computer Engineering');
 
 INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
 VALUES (gen_random_uuid(), 'Tuğçe', 'Türkmenler', 'tugceturkmenler@std.iyte.edu.tr',
@@ -93,9 +105,21 @@ INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, depar
 VALUES (gen_random_uuid(), 'Ali', 'Kaya', 'alikaya@std.iyte.edu.tr',
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000004', 4.0, 'Chemical Engineering');
 
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+VALUES (gen_random_uuid(), 'Ahmet', 'Altın', 'ahmetaltin@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000005', 3.5, 'Energy Systems Engineering');
+
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+VALUES (gen_random_uuid(), 'Mahmut', 'Gümüş', 'mahmutgumus@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000005', 3.0, 'Energy Systems Engineering');
+
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+VALUES (gen_random_uuid(), 'Murat', 'Bronz', 'muratbronz@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000006', 3.0, 'Bioengineering');
+
 ---------------------------------------------------------------------------------- UserRepository ----------------------------------------------------------------------------------
 INSERT INTO users (id, name, surname, email, password, role) -- ADMIN
-VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc871', 'ADMIN', 'ADMIN', 'admin@std.iyte.edu.tr',
+VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc871', 'Efe', 'İncir', 'efeincir@std.iyte.edu.tr',
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'ADMIN');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
@@ -118,19 +142,48 @@ VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cac879', 'Ali', 'Kaya', 'alikaya@std.iyte
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'CANDIDATE', '00000000004', '000000004', 4.0,
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987');
 
+INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
+VALUES ('6b8a3d25-2b7a-4683-89ed-ac0e42cac900', 'Ahmet', 'Altın', 'ahmetaltin@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'VOTER', '00000000005', '000000005', 3.5,
+        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911');
+
+INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
+VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac901', 'Mahmut', 'Gümüş', 'mahmutgumus@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'VOTER', '00000000006', '000000006', 3.0,
+        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911');
+
+INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
+VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac914', 'Murat', 'Bronz', 'muratbronz@std.iyte.edu.tr',
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'CANDIDATE', '00000000007', '000000007', 3.0,
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879');
+
 ---------------------------------------------------------------------------------- ElectionRepository ----------------------------------------------------------------------------------
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- FINISHED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800',
         '2022-2023 Spring | Computer Engineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 1, 2023, '2023-5-14', '2023-5-15',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2023, '2023-5-14', '2023-5-15',
         true, '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878');
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- ONGOING ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801',
         '2022-2023 Spring | Chemical Engineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987', 1, 2023, '2023-5-14', '2023-7-20',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987', 0, 2023, '2023-5-14', '2023-7-20',
+        false, null);
+
+INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
+                      is_finished, winner_id) -- ONGOING ELECTION
+VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc834',
+        '2022-2023 Spring | Bioengineering Department Representative Election',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2023, '2023-5-14', '2023-7-20',
+        false, null);
+
+INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
+                      is_finished, winner_id) -- NOT STARTED ELECTION
+VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc802',
+        '2022-2023 Spring | Energy Systems Engineering Department Representative Election',
+        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2023, '2023-7-03', '2023-7-04',
         false, null);
 
 ---------------------------------------------------------------------------------- Candidates of Election ----------------------------------------------------------------------------------
@@ -145,11 +198,27 @@ VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42c
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42cac879');
 
+-- '2022-2023 Spring | Bioengineering Department Representative Election' (ONGOING)
+INSERT INTO election_candidates (election_id, candidates_id)
+VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc834', '7b8a3d25-2b7a-4683-89ed-ac0e42cac914');
+
 ---------------------------------------------------------------------------------- Vote ----------------------------------------------------------------------------------
 INSERT INTO vote (id, voter_id, for_election_id, for_candidate_id, date_time)
 VALUES ('5baaaa25-2b7a-4683-89ab-ac0e42cdc800', '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878',
         '5b8a3d25-2b7a-4683-89ab-ac0e42cdc800', '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878', '2023-5-14:12:00:00');
 
+INSERT INTO vote (id, voter_id, for_election_id, for_candidate_id, date_time)
+VALUES ('5baaaa25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878',
+        '5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42cac878', '2023-5-15:12:00:00');
+
 ---------------------------------------------------------------------------------- Votes of Election ----------------------------------------------------------------------------------
 INSERT INTO election_votes (election_id, votes_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800', '5baaaa25-2b7a-4683-89ab-ac0e42cdc800');
+
+INSERT INTO election_votes (election_id, votes_id)
+VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5baaaa25-2b7a-4683-89ab-ac0e42cdc801');
+
+---------------------------------------------------------------------------------- Join Representative to Department ----------------------------------------------------------------------------------
+UPDATE department
+SET representative_id = '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878'
+WHERE id = '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879';
