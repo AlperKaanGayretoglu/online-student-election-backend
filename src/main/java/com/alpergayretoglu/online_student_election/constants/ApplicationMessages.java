@@ -12,9 +12,8 @@ public class ApplicationMessages {
 
     public static final String ELECTION_CREATE_SUCCESS = "Election has been created";
     public static final String ELECTION_CREATE_FAIL_MISSING_PARAMETERS = "Please enter all the expected parameters";
-    public static final String ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE = "Start date cannot come after the end date of an election";
-    public static final String ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE = "Start date cannot come before the current date";
-    public static final String ELECTION_CREATE_FAIL_NAME_ALREADY_EXISTS = "An election with this name already exists";
+    public static final String ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE = "Start date can't come after the end date of an election";
+    public static final String ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE = "Start date can't be before the current date";
 
     public static final String ANNOUNCEMENT_EMAIL_SEND_SUCCESS = "The emails have been sent successfully";
 
@@ -22,8 +21,8 @@ public class ApplicationMessages {
 
     public static final String RE_ELECTION_CREATE_SUCCESS = "New election has been confirmed";
     public static final String RE_ELECTION_CREATE_FAIL_MISSING_PARAMETERS = "Please enter all the expected parameters";
-    public static final String RE_ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE = "Start date cannot come after the end date of an election";
-    public static final String RE_ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE = "Start date cannot come before the current date";
+    public static final String RE_ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE = "Start date can't come after the end date of an election";
+    public static final String RE_ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE = "Start date can't come before the current date";
 
     public static final String ELECTION_END_SUCCESS = "The election has ended, and the results have been announced";
 
@@ -42,8 +41,13 @@ public class ApplicationMessages {
 
     // EXTRA MESSAGES
     public static final String ELECTION_CREATE_FAIL_ELECTION_FINISHED = "Election is finished, cannot update";
+    public static final String ELECTION_CREATE_FAIL_DEPARTMENT_NOT_FOUND = "Department not found";
+    public static final String ELECTION_CREATE_FAIL_DATE_OUT_OF_RANGE = "The given date is out of the range of the term dates";
+    public static final String ELECTION_CREATE_FAIL_ELECTION_ALREADY_EXISTS = "There is already a running election for this term and department";
+
 
     public static final String ELECTION_END_FAIL_ELECTION_ALREADY_FINISHED = "This election has already finished";
+    public static final String ELECTION_END_FAIL_WINNER_CANNOT_BE_DECIDED = "Can't end election because winner cannot be decided";
 
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION = "There is no election for your department yet.";
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE = "You are already a candidate.";
@@ -51,7 +55,10 @@ public class ApplicationMessages {
 
     public static final String VOTE_SUBMIT_FAIL_ALREADY_VOTED = "You have already voted";
     public static final String VOTE_SUBMIT_FAIL_INVALID_CANDIDATE = "The candidate you have chosen is not valid";
+    public static final String VOTE_SUBMIT_FAIL_ELECTION_FINISHED = "The election has already finished";
+    public static final String VOTE_SUBMIT_FAIL_ELECTION_NOT_STARTED = "The election has not started yet";
 
     public static final String CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE = "You are not a candidate";
+    public static final String CANDIDATE_WITHDRAW_FAIL_ELECTION_STARTED = "The election has already started";
 
 }
