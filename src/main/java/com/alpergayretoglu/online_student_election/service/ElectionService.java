@@ -32,14 +32,11 @@ public class ElectionService {
     private final VoteRepository voteRepository;
 
     public Election addElection(ElectionCreateRequest request) {
-        if (electionRepository.existsByName(request.getName())) {
-            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_NAME_ALREADY_EXISTS); // TODO make specific exception
-        }
-
+        assertElectionCreateRequestIsValid(request);
         return electionRepository.save(ElectionCreateRequest.toEntity(request, departmentRepository));
     }
 
-    public List<Election> getElections() {
+    public List<Election> listElections() {
         return electionRepository.findAll();
     }
 
@@ -48,28 +45,20 @@ public class ElectionService {
     }
 
     public Election updateElection(String id, ElectionUpdateRequest request) {
+        assertElectionUpdateRequestIsValid(request);
+
         Election oldElection = getElectionWithException(id);
 
         if (oldElection.getIsFinished()) {
-            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_ELECTION_FINISHED); // TODO make specific exception
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_ELECTION_FINISHED);
         }
 
-        oldElection.setName(request.getName());
-        oldElection.setStartDate(request.getStartDate());
-        oldElection.setEndDate(request.getEndDate());
-
-        return electionRepository.save(oldElection);
+        return electionRepository.save(ElectionUpdateRequest.updateEntityUsingRequest(oldElection, request));
     }
 
     public void deleteElection(String electionId) {
         Election election = getElectionWithException(electionId);
         electionRepository.delete(election);
-    }
-
-    private Election getElectionWithException(String id) {
-        return electionRepository.findById(id).orElseThrow(() -> {
-            throw new EntityNotFoundException();
-        });
     }
 
     public List<Election> getAllElectionsForCurrentTerm() {
@@ -88,6 +77,9 @@ public class ElectionService {
         });
 
         User winner = election.decideWinner();
+        if (winner == null) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_END_FAIL_WINNER_CANNOT_BE_DECIDED);
+        }
         winner.setRole(UserRole.REPRESENTATIVE);
 
         election.setWinner(winner);
@@ -101,12 +93,25 @@ public class ElectionService {
         return ApplicationMessages.ELECTION_END_SUCCESS;
     }
 
-
     public String castVote(VoteCastingRequest voteCastingRequest) {
         User voter = userRepository.findById(voteCastingRequest.getVoterId()).orElseThrow(() -> {
             throw new EntityNotFoundException();
         });
+
         Election election = getElectionWithException(voteCastingRequest.getElectionId());
+
+        if (election.getIsFinished()) {
+            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED;
+        }
+
+        if (election.getStartDate().isAfter(LocalDateTime.now())) {
+            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_NOT_STARTED;
+        }
+
+        if (election.getEndDate().isBefore(LocalDateTime.now())) {
+            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED;
+        }
+
         User candidate = election.getCandidates().stream()
                 .filter(cand -> cand.getId().equals(voteCastingRequest.getCandidateId()))
                 .findFirst().orElse(null);
@@ -131,5 +136,47 @@ public class ElectionService {
         electionRepository.save(election);
 
         return ApplicationMessages.VOTE_SUBMIT_SUCCESS;
+    }
+
+    private Election getElectionWithException(String id) {
+        return electionRepository.findById(id).orElseThrow(() -> {
+            throw new EntityNotFoundException("Election not found with id: " + id);
+        });
+    }
+
+    private void assertElectionCreateRequestIsValid(ElectionCreateRequest request) {
+        assertDateIsValid(request.getStartDate(), request.getEndDate());
+
+        Department department = departmentRepository.findByName(request.getDepartmentName()).orElseThrow(() -> {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DEPARTMENT_NOT_FOUND);
+        });
+
+        int year = request.getStartDate().getYear();
+
+        Term term = Term.getTermOfDate(request.getStartDate());
+
+        Election election = electionRepository.findByDepartmentAndTermAndYear(department, term, year).orElse(null);
+        if (election != null && !election.getIsFinished()) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_ELECTION_ALREADY_EXISTS);
+        }
+    }
+
+    private void assertElectionUpdateRequestIsValid(ElectionUpdateRequest request) {
+        assertDateIsValid(request.getStartDate(), request.getEndDate());
+    }
+
+    private void assertDateIsValid(LocalDateTime startDate, LocalDateTime endDate) {
+        if (startDate.isAfter(endDate)) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_START_DATE_AFTER_END_DATE);
+        }
+
+        if (startDate.isBefore(LocalDateTime.now())) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE);
+        }
+
+        Term term = Term.getTermOfDate(startDate);
+        if (term == null) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DATE_OUT_OF_RANGE);
+        }
     }
 }

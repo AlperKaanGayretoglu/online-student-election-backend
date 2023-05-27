@@ -1,10 +1,11 @@
 package com.alpergayretoglu.online_student_election.model.enums;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public enum Term {
-    FALL(15, 9, 15, 1),
-    SPRING(15, 2, 15, 6);
+    SPRING(15, 1, 15, 8),
+    FALL(15, 8, 15, 1);
 
     private final int startDay;
     private final int startMonth;
@@ -19,22 +20,27 @@ public enum Term {
     }
 
     public static Term getCurrentTerm() {
-        LocalDate now = LocalDate.now();
-        int month = now.getMonthValue();
-        if (month >= 9 && month <= 12) {
-            return FALL;
-        } else {
-            return SPRING;
-        }
+        return getTermOfDate(LocalDateTime.now());
     }
 
-    public LocalDate getStartDate(int year) {
+    public static Term getTermOfDate(LocalDateTime date) {
+        int year = date.getYear();
+        for (Term term : Term.values()) {
+            LocalDate startDate = term.getStartDateForYear(year);
+            LocalDate endDate = term.getEndDateForYear(year);
+            if (date.isAfter(startDate.atStartOfDay()) && date.isBefore(endDate.atStartOfDay())) {
+                return term;
+            }
+        }
+        return null;
+    }
+
+    public LocalDate getStartDateForYear(int year) {
         return LocalDate.of(year, startMonth, startDay);
     }
 
-    public LocalDate getEndDate(int year) {
+    public LocalDate getEndDateForYear(int year) {
         return LocalDate.of(year, endMonth, endDay);
     }
-
 
 }

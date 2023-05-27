@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Builder
@@ -16,21 +16,14 @@ import java.time.LocalDate;
 public class ElectionUpdateRequest {
 
     @NotBlank
-    private String name;
+    private LocalDateTime startDate;
 
     @NotBlank
-    private LocalDate startDate;
+    private LocalDateTime endDate;
 
-    @NotBlank
-    private LocalDate endDate;
-
-    public static Election toEntity(ElectionUpdateRequest request) {
-        return Election.builder()
-                .name(request.getName())
-                .startDate(request.getStartDate())
-                .endDate(request.getEndDate())
-                .isFinished(false)
-                .winner(null)
-                .build();
+    public static Election updateEntityUsingRequest(Election oldElection, ElectionUpdateRequest request) {
+        oldElection.setStartDate(request.getStartDate());
+        oldElection.setEndDate(request.getEndDate());
+        return oldElection;
     }
 }

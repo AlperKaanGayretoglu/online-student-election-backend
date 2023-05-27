@@ -5,7 +5,7 @@ import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.Term;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +20,12 @@ public class ElectionResponse {
     private String departmentName;
     private Term term;
     private Integer year;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Boolean isFinished;
     private String winnerName;
     private List<String> candidateNames;
+    private Integer voteCount;
 
     public static ElectionResponse fromEntity(Election election) {
         User winner = election.getWinner();
@@ -40,6 +41,7 @@ public class ElectionResponse {
                 .isFinished(election.getIsFinished())
                 .winnerName(winnerName)
                 .candidateNames(election.getCandidates().stream().map(User::getName).collect(Collectors.toList()))
+                .voteCount(election.getVoteCount())
                 .build();
     }
 }

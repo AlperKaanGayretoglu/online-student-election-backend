@@ -23,7 +23,7 @@ public class ElectionController {
 
     @GetMapping
     public List<ElectionResponse> listElections() {
-        return electionService.getElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
+        return electionService.listElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("{electionId}")
