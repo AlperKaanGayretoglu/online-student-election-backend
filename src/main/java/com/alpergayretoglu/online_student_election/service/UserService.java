@@ -11,6 +11,7 @@ import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,17 +44,17 @@ public class UserService {
                 .findFirst().orElse(null);
 
         if (election == null) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION;
+            throw new RuntimeException(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION);
         }
 
         if (user.getRole() == UserRole.CANDIDATE) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE;
+            throw new RuntimeException(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE);
         }
 
         EdevletUser edevletUser = edevletUserService.getEdevletUserByTcNo(user.getTcNo());
 
         if (!edevletUser.isEligible()) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_NOT_ELIGIBLE;
+            return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS;
         }
 
         user.setRole(UserRole.CANDIDATE);
@@ -81,7 +82,7 @@ public class UserService {
         User user = getUserWithException(userId);
 
         if (user.getRole() != UserRole.CANDIDATE) {
-            return ApplicationMessages.CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE;
+            throw new EntityNotFoundException(ApplicationMessages.CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE);
         }
 
         Election election = electionService.getAllElectionsForCurrentTerm().stream()
@@ -90,6 +91,10 @@ public class UserService {
 
         if (election == null) {
             throw new EntityNotFoundException("User is a candidate but no election found for him/her.");
+        }
+
+        if (election.getStartDate().isBefore(LocalDateTime.now())) {
+            throw new EntityNotFoundException(ApplicationMessages.CANDIDATE_WITHDRAW_FAIL_ELECTION_STARTED);
         }
 
         user.setRole(UserRole.VOTER);
