@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
+                // .antMatchers(HttpMethod.POST, "/election").hasAuthority("ADMIN") // TODO: This does not work -> makes the whole /election endpoint inaccessible
                 .antMatchers("/", "/v2/api-docs/**", "/swagger.json", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/csrf").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
