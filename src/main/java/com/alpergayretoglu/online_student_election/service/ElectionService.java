@@ -93,8 +93,8 @@ public class ElectionService {
         return ApplicationMessages.ELECTION_END_SUCCESS;
     }
 
-    public String castVote(VoteCastingRequest voteCastingRequest) {
-        User voter = userRepository.findById(voteCastingRequest.getVoterId()).orElseThrow(() -> {
+    public String castVote(String voterId, VoteCastingRequest voteCastingRequest) {
+        User voter = userRepository.findById(voterId).orElseThrow(() -> {
             throw new EntityNotFoundException();
         });
 

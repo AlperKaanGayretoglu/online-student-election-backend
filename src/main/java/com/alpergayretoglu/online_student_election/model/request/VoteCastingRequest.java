@@ -10,10 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class VoteCastingRequest {
-
-    @NotBlank
-    private String voterId;
-
+    
     @NotBlank
     private String electionId;
 
