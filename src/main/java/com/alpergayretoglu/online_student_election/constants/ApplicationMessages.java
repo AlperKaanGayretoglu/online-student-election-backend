@@ -61,4 +61,6 @@ public class ApplicationMessages {
     public static final String CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE = "You are not a candidate";
     public static final String CANDIDATE_WITHDRAW_FAIL_ELECTION_STARTED = "The election has already started";
 
+    public static final String ANNOUNCEMENT_ADD_SUCCESS = "The announcement has been made successfully";
+
 }

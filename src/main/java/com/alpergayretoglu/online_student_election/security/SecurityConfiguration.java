@@ -54,17 +54,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // ADMIN ONLY
                 .antMatchers(HttpMethod.POST,
                         "/election", "/election/**",
-                        "/department", "/department/**"
+                        "/department", "/department/**",
+                        "/announcement", "/announcement/**"
                 ).hasAuthority(UserRole.ADMIN.name())
 
                 .antMatchers(HttpMethod.PUT,
                         "/election", "/election/**",
-                        "/department", "/department/**"
+                        "/department", "/department/**",
+                        "/announcement", "/announcement/**"
                 ).hasAuthority(UserRole.ADMIN.name())
 
                 .antMatchers(HttpMethod.DELETE,
                         "/election", "/election/**",
-                        "/department", "/department/**"
+                        "/department", "/department/**",
+                        "/announcement", "/announcement/**"
                 ).hasAuthority(UserRole.ADMIN.name())
 
                 // OTHER
