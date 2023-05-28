@@ -9,6 +9,9 @@ public class SecurityConstants {
     public static final String TOKEN_ISSUER = "OnlineStudentElection";
     public static final String TOKEN_AUDIENCE = "OnlineStudentElection";
 
+    // Security Role
+    public static final String SELF = "SELF";
+
     private SecurityConstants() {
     }
 

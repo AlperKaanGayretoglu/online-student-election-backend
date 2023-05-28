@@ -1,6 +1,7 @@
 package com.alpergayretoglu.online_student_election.security;
 
 import com.alpergayretoglu.online_student_election.config.SecurityConfig;
+import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import io.jsonwebtoken.*;
 import org.apache.commons.lang3.StringUtils;
@@ -21,10 +22,12 @@ public class JwtService {
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
     private final SecurityConfig securityConfig;
+    private final UserRepository userRepository;
 
     @Autowired
     public JwtService(SecurityConfig securityConfig, UserRepository userRepository) {
         this.securityConfig = securityConfig;
+        this.userRepository = userRepository;
     }
 
     public Authentication verifyToken(String token, HttpServletRequest request) {
@@ -41,7 +44,8 @@ public class JwtService {
                         .getSubject();
 
                 if (StringUtils.isNotEmpty(subject)) {
-                    return new UsernamePasswordAuthenticationToken(subject, null, null);
+                    User user = userRepository.findById(subject).orElseThrow(() -> new RuntimeException("User not found with id: " + subject));
+                    return new UsernamePasswordAuthenticationToken(subject, null, user.getAuthorities());
                 }
             } catch (ExpiredJwtException exception) {
                 logger.warn("Request to parse expired JWT : {} failed : {}", token, exception.getMessage());
