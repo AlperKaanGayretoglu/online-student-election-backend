@@ -175,7 +175,7 @@ VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac915', 'Melis', 'Elmas', 'meliselmas@st
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- FINISHED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800',
-        '2022-2023 Spring | Computer Engineering Department Representative Election',
+        '2023-2024 Spring | Computer Engineering Department Representative Election',
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2023, '2023-5-14', '2023-5-15',
         true, '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878');
 
