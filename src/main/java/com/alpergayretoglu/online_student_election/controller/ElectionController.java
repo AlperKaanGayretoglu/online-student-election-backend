@@ -57,14 +57,19 @@ public class ElectionController {
         return electionService.castVote(voterId, voteCastingRequest);
     }
 
-    @GetMapping("/upcoming")
-    public List<ElectionResponse> getAllUpcomingElections() {
-        return electionService.getAllUpcomingElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
-    }
-
     @GetMapping("/finished")
     public List<ElectionResponse> getAllFinishedElections() {
         return electionService.getAllFinishedElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
+    }
+
+    @GetMapping("/ongoing")
+    public List<ElectionResponse> getAllOngoingElections() {
+        return electionService.getAllOngoingElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
+    }
+
+    @GetMapping("/upcoming")
+    public List<ElectionResponse> getAllUpcomingElections() {
+        return electionService.getAllUpcomingElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
     }
 
     @GetMapping("/current_term")
