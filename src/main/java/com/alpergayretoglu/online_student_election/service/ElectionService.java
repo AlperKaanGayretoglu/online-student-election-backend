@@ -179,4 +179,8 @@ public class ElectionService {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DATE_OUT_OF_RANGE);
         }
     }
+
+    public List<Election> getAllUpcomingElections() {
+        return electionRepository.findAllByStartDateAfter(LocalDateTime.now());
+    }
 }

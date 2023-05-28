@@ -57,6 +57,11 @@ public class ElectionController {
         return electionService.castVote(voterId, voteCastingRequest);
     }
 
+    @GetMapping("/upcoming")
+    public List<ElectionResponse> getAllUpcomingElections() {
+        return electionService.getAllUpcomingElections().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
+    }
+
     @GetMapping("/current_term")
     public List<ElectionResponse> getAllElectionsForCurrentTerm() {
         return electionService.getAllElectionsForCurrentTerm().stream().map(ElectionResponse::fromEntity).collect(Collectors.toList());
