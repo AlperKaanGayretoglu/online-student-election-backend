@@ -183,4 +183,10 @@ public class ElectionService {
     public List<Election> getAllUpcomingElections() {
         return electionRepository.findAllByStartDateAfter(LocalDateTime.now());
     }
+
+    public List<Election> getAllFinishedElections() {
+        List<Election> elections = electionRepository.findAllByIsFinished(true);
+        elections.sort((o1, o2) -> o2.getEndDate().compareTo(o1.getEndDate()));
+        return elections;
+    }
 }

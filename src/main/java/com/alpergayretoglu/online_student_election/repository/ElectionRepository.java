@@ -21,4 +21,6 @@ public interface ElectionRepository extends JpaRepository<Election, String> {
     public List<Election> findAllByTermAndYear(Term term, int year);
 
     public List<Election> findAllByStartDateAfter(LocalDateTime startDate);
+
+    public List<Election> findAllByIsFinished(boolean isFinished);
 }
