@@ -11,14 +11,14 @@ import lombok.*;
 @NoArgsConstructor
 public class ElectionResultResponse {
     private String departmentName;
-    private String winnerName;
+    private String winnerNameSurname;
 
     public static ElectionResultResponse fromEntity(Election election) {
         User winner = election.getWinner();
-        String winnerName = winner == null ? null : winner.getName();
+        String winnerNameSurname = winner == null ? null : (winner.getName() + " " + winner.getSurname());
         return ElectionResultResponse.builder()
                 .departmentName(election.getDepartment().getName())
-                .winnerName(winnerName)
+                .winnerNameSurname(winnerNameSurname)
                 .build();
     }
 }

@@ -23,13 +23,13 @@ public class ElectionResponse {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Boolean isFinished;
-    private String winnerName;
+    private String winnerNameSurname;
     private List<String> candidateNames;
     private Integer voteCount;
 
     public static ElectionResponse fromEntity(Election election) {
         User winner = election.getWinner();
-        String winnerName = winner == null ? null : winner.getName();
+        String winnerName = winner == null ? null : (winner.getName() + " " + winner.getSurname());
         return ElectionResponse.builder()
                 .id(election.getId())
                 .name(election.getName())
@@ -39,7 +39,7 @@ public class ElectionResponse {
                 .startDate(election.getStartDate())
                 .endDate(election.getEndDate())
                 .isFinished(election.getIsFinished())
-                .winnerName(winnerName)
+                .winnerNameSurname(winnerName)
                 .candidateNames(election.getCandidates().stream().map(User::getName).collect(Collectors.toList()))
                 .voteCount(election.getVoteCount())
                 .build();
