@@ -2,19 +2,13 @@ package com.alpergayretoglu.online_student_election.service;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
-import com.alpergayretoglu.online_student_election.model.entity.Department;
-import com.alpergayretoglu.online_student_election.model.entity.Election;
-import com.alpergayretoglu.online_student_election.model.entity.User;
-import com.alpergayretoglu.online_student_election.model.entity.Vote;
+import com.alpergayretoglu.online_student_election.model.entity.*;
 import com.alpergayretoglu.online_student_election.model.enums.Term;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
 import com.alpergayretoglu.online_student_election.model.request.ElectionCreateRequest;
 import com.alpergayretoglu.online_student_election.model.request.ElectionUpdateRequest;
 import com.alpergayretoglu.online_student_election.model.request.VoteCastingRequest;
-import com.alpergayretoglu.online_student_election.repository.DepartmentRepository;
-import com.alpergayretoglu.online_student_election.repository.ElectionRepository;
-import com.alpergayretoglu.online_student_election.repository.UserRepository;
-import com.alpergayretoglu.online_student_election.repository.VoteRepository;
+import com.alpergayretoglu.online_student_election.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +22,7 @@ public class ElectionService {
 
     private final ElectionRepository electionRepository;
     private final DepartmentRepository departmentRepository;
+    private final AnnouncementRepository announcementRepository;
     private final UserRepository userRepository;
     private final VoteRepository voteRepository;
 
@@ -89,6 +84,13 @@ public class ElectionService {
         Department department = election.getDepartment();
         department.setRepresentative(winner);
         departmentRepository.save(department);
+
+        Announcement announcement = Announcement.builder()
+                .title("The " + election.getName() + " election has ended.")
+                .content("The winner is " + winner.getName() + " " + winner.getSurname() + ".")
+                .date(LocalDateTime.now())
+                .build();
+        announcementRepository.save(announcement);
 
         return ApplicationMessages.ELECTION_END_SUCCESS;
     }
