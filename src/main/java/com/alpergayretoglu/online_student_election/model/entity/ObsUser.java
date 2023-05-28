@@ -31,12 +31,16 @@ public class ObsUser extends BaseEntity {
 
     // STUDENT
     // -------------------------------------------------------
+    @Column(nullable = false, unique = true)
     private String tcNo;
 
+    @Column(nullable = false, unique = true)
     private String studentNo;
 
+    @Column(nullable = false)
     private Double gpa;
 
+    @Column(nullable = false)
     private String departmentName;
     // -------------------------------------------------------
 

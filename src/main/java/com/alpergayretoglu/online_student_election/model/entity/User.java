@@ -40,10 +40,13 @@ public class User extends BaseEntity implements UserDetails {
 
     // STUDENT
     // -------------------------------------------------------
+    @Column(nullable = false, unique = true)
     private String tcNo;
 
+    @Column(nullable = false, unique = true)
     private String studentNo;
 
+    @Column(nullable = false)
     private Double gpa;
 
     @ManyToOne
