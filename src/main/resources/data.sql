@@ -89,41 +89,50 @@ INSERT INTO edevlet_user (id, tc_no, name, surname, is_member_ofapolitical_party
 VALUES (gen_random_uuid(), '00000000008', 'Melis', 'Elmas', false, false, false);
 
 ---------------------------------------------------------------------------------- ObsUserRepository ----------------------------------------------------------------------------------
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Efe', 'İncir', 'efeincir@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '280201097', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '280201097', 4.0, 'Computer Engineering',
+        '00000000000');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Tuğçe', 'Türkmenler', 'tugceturkmenler@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '290201097', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '290201097', 4.0, 'Computer Engineering',
+        '00000000001');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Kerem Yavuz', 'Şenyurt', 'keremsenyurt@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '290201100', 4.0, 'Computer Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '290201100', 4.0, 'Computer Engineering',
+        '00000000002');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Aylin', 'Kocaman', 'aylinkocaman@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000003', 4.0, 'Chemical Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000003', 4.0, 'Chemical Engineering',
+        '00000000003');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Ali', 'Kaya', 'alikaya@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000004', 4.0, 'Chemical Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000004', 4.0, 'Chemical Engineering',
+        '00000000004');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Ahmet', 'Altın', 'ahmetaltin@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000005', 3.5, 'Energy Systems Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000005', 3.5, 'Energy Systems Engineering',
+        '00000000005');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Mahmut', 'Gümüş', 'mahmutgumus@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000006', 3.0, 'Energy Systems Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000006', 3.0, 'Energy Systems Engineering',
+        '00000000006');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Murat', 'Bronz', 'muratbronz@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000007', 3.0, 'Bioengineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000007', 3.0, 'Bioengineering',
+        '00000000007');
 
-INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name)
+INSERT INTO obs_user (id, name, surname, email, password, student_no, gpa, department_name, tc_no)
 VALUES (gen_random_uuid(), 'Melis', 'Elmas', 'muratbronz@std.iyte.edu.tr',
-        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000008', 3.0, 'Energy Systems Engineering');
+        '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', '000000008', 3.0, 'Energy Systems Engineering',
+        '00000000008');
 
 ---------------------------------------------------------------------------------- UserRepository ----------------------------------------------------------------------------------
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id) -- ADMIN
@@ -175,29 +184,29 @@ VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac915', 'Melis', 'Elmas', 'meliselmas@st
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- FINISHED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800',
-        '2023-2024 Spring | Computer Engineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2023, '2023-5-14', '2023-5-15',
+        '2022-2023 Spring | Computer Engineering Department Representative Election',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2022, '2023-5-14', '2023-5-15',
         true, '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878');
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- ONGOING ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801',
-        '2023-2024 Spring | Chemical Engineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987', 0, 2023, '2023-5-14', '2023-7-20',
+        '2022-2023 Spring | Chemical Engineering Department Representative Election',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987', 0, 2022, '2023-5-14', '2023-7-20',
         false, null);
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- ONGOING ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc834',
-        '2023-2024 Spring | Bioengineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2023, '2023-5-14', '2023-7-20',
+        '2022-2023 Spring | Bioengineering Department Representative Election',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2022, '2023-5-14', '2023-7-20',
         false, null);
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- NOT STARTED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc802',
-        '2023-2024 Spring | Energy Systems Engineering Department Representative Election',
-        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2023, '2023-7-03', '2023-7-04',
+        '2022-2023 Spring | Energy Systems Engineering Department Representative Election',
+        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2022, '2023-7-03', '2023-7-04',
         false, null);
 
 ---------------------------------------------------------------------------------- Candidates of Election ----------------------------------------------------------------------------------
