@@ -42,7 +42,7 @@ public class UserService {
     public String applyForCandidacy(String userId) {
         User user = getUserWithException(userId);
 
-        Election election = electionService.getAllElectionsForCurrentTerm().stream()
+        Election election = electionService.getAllUpcomingElections().stream()
                 .filter(elect -> elect.getDepartment().equals(user.getDepartment()))
                 .findFirst().orElse(null);
 
@@ -109,7 +109,7 @@ public class UserService {
             throw new EntityNotFoundException(ApplicationMessages.CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE);
         }
 
-        Election election = electionService.getAllElectionsForCurrentTerm().stream()
+        Election election = electionService.getAllUpcomingElections().stream()
                 .filter(elect -> elect.getCandidates().stream().anyMatch(cand -> cand.getId().equals(user.getId())))
                 .findFirst().orElse(null);
 

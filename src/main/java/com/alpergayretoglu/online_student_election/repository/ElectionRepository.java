@@ -23,4 +23,6 @@ public interface ElectionRepository extends JpaRepository<Election, String> {
     public List<Election> findAllByStartDateAfter(LocalDateTime startDate);
 
     public List<Election> findAllByIsFinished(boolean isFinished);
+
+    public List<Election> findAllByStartDateBeforeAndEndDateAfterAndIsFinished(LocalDateTime startDate, LocalDateTime endDate, boolean isFinished);
 }

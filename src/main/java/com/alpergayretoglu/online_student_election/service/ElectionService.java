@@ -56,7 +56,7 @@ public class ElectionService {
         electionRepository.delete(election);
     }
 
-    public List<Election> getAllElectionsForCurrentTerm() {
+    public List<Election> getAllElectionsForCurrentTerm() { // TODO: REMOVE THIS METHOD
         return electionRepository.findAllByTermAndYear(Term.getCurrentTerm(), LocalDate.now().getYear());
     }
 
@@ -190,5 +190,9 @@ public class ElectionService {
         List<Election> elections = electionRepository.findAllByIsFinished(true);
         elections.sort((o1, o2) -> o2.getEndDate().compareTo(o1.getEndDate()));
         return elections;
+    }
+
+    public List<Election> getAllOngoingElections() {
+        return electionRepository.findAllByStartDateBeforeAndEndDateAfterAndIsFinished(LocalDateTime.now(), LocalDateTime.now(), false);
     }
 }
