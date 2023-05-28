@@ -2,10 +2,12 @@ package com.alpergayretoglu.online_student_election.service;
 
 import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.exception.EntityNotFoundException;
+import com.alpergayretoglu.online_student_election.model.entity.CandidacyApplication;
 import com.alpergayretoglu.online_student_election.model.entity.EdevletUser;
 import com.alpergayretoglu.online_student_election.model.entity.Election;
 import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
+import com.alpergayretoglu.online_student_election.repository.CandidacyApplicationRepository;
 import com.alpergayretoglu.online_student_election.repository.ElectionRepository;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class UserService {
     private final EdevletUserService edevletUserService;
     private final ElectionService electionService;
     private final ElectionRepository electionRepository;
+    private final CandidacyApplicationRepository candidacyApplicationRepository;
 
     public List<User> getUsers() {
         return userRepository.findAll();
@@ -51,7 +54,20 @@ public class UserService {
             throw new RuntimeException(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE);
         }
 
+        List<CandidacyApplication> candidacyApplications = candidacyApplicationRepository.findAllByUser(user);
+        if (candidacyApplications.stream().anyMatch(candidacyApplication -> candidacyApplication.getApplicationDate().plusDays(3).isAfter(LocalDateTime.now()))) {
+            throw new RuntimeException(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_SUBMITTED);
+        }
+
         EdevletUser edevletUser = edevletUserService.getEdevletUserByTcNo(user.getTcNo());
+
+        CandidacyApplication candidacyApplication = CandidacyApplication.builder()
+                .user(user)
+                .election(election)
+                .isAccepted(edevletUser.isEligible())
+                .applicationDate(LocalDateTime.now())
+                .build();
+        candidacyApplicationRepository.save(candidacyApplication);
 
         if (!edevletUser.isEligible()) {
             return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS;
@@ -73,9 +89,17 @@ public class UserService {
 
     public String getApplicationStatus(String userId) {
         User user = getUserWithException(userId);
-        return user.getRole() == UserRole.CANDIDATE ?
-                ApplicationMessages.CANDIDATE_APPLICATION_STATUS_ACCEPTED :
-                ApplicationMessages.CANDIDATE_APPLICATION_STATUS_REJECTED;
+
+        if (user.getRole() == UserRole.CANDIDATE) {
+            return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_ACCEPTED;
+        }
+
+        if (candidacyApplicationRepository.findAllByUser(user).stream().noneMatch(candidacyApplication -> candidacyApplication
+                .getApplicationDate().plusDays(3).isAfter(LocalDateTime.now()))) {
+            return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_NOT_SUBMITTED;
+        }
+
+        return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_REJECTED;
     }
 
     public String withdrawFromCandidacy(String userId) {

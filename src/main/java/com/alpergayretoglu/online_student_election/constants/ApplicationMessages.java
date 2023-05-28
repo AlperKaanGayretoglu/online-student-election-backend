@@ -29,7 +29,7 @@ public class ApplicationMessages {
     public static final String CANDIDATE_APPLICATION_SUBMIT_SUCCESS = "Submission was successful";
     public static final String CANDIDATE_APPLICATION_STATUS_ACCEPTED = "Your application has been accepted; you are a candidate now";
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_MISSING_PARAMETERS = "Please enter all the expected parameters";
-    public static final String CANDIDATE_APPLICATION_STATUS_REJECTED = "Your application has been rejected; you are not eligible to become a candidate";
+    public static final String CANDIDATE_APPLICATION_STATUS_REJECTED = "Your application has been rejected. You will be able to apply again in 3 days";
 
     public static final String VOTE_SUBMIT_SUCCESS = "Your vote has been saved";
     public static final String VOTE_SUBMIT_FAIL_NO_CANDIDATE_SELECTED = "Please choose a candidate to vote";
@@ -52,6 +52,9 @@ public class ApplicationMessages {
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION = "There is no election for your department yet.";
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE = "You are already a candidate.";
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NOT_ELIGIBLE = "You are not eligible for candidacy.";
+    public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_SUBMITTED = "You have already submitted an application. Wait for 3 days to apply again.";
+
+    public static final String CANDIDATE_APPLICATION_STATUS_NOT_SUBMITTED = "You have not submitted an application yet";
 
     public static final String VOTE_SUBMIT_FAIL_ALREADY_VOTED = "You have already voted";
     public static final String VOTE_SUBMIT_FAIL_INVALID_CANDIDATE = "The candidate you have chosen is not valid";
