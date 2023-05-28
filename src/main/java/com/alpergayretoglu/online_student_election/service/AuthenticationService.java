@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationService {
-    private final UserRepository userRepository; // TODO: make this userService
+    private final UserRepository userRepository;
     private final ObsUserRepository obsUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -30,7 +30,7 @@ public class AuthenticationService {
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
             // invalid email
-            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO: specific exception
+            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS);
         });
 
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -38,13 +38,13 @@ public class AuthenticationService {
             return new AuthenticationResponse(token, user.getId(), user.getName(), user.getSurname());
         }
         // invalid password
-        throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO specific exception
+        throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS);
     }
 
     private AuthenticationResponse register(LoginRequest request) {
         ObsUser obsUser = obsUserRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
             // invalid email
-            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS); // TODO: specific exception
+            throw new RuntimeException(ApplicationMessages.LOGIN_FAIL_INCORRECT_FIELDS);
         });
 
         User user = User.builder()
