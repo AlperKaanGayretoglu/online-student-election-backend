@@ -14,7 +14,7 @@ public interface ElectionRepository extends JpaRepository<Election, String> {
 
     public boolean existsByName(String name);
 
-    public Optional<Election> findByDepartmentAndTermAndYear(Department department, Term term, int year);
+    public List<Election> findAllByDepartmentAndTermAndYear(Department department, Term term, int year);
 
     public boolean existsByDepartmentAndTermAndYear(Department department, Term term, int year);
 

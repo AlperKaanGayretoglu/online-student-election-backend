@@ -43,4 +43,11 @@ public enum Term {
         return LocalDate.of(year, endMonth, endDay);
     }
 
+    public int decideYear(LocalDateTime startDate) {
+        if (this == Term.FALL) {
+            return startDate.getYear();
+        }
+        return startDate.getYear() - 1;
+    }
+
 }
