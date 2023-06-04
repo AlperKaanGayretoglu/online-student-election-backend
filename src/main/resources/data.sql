@@ -23,7 +23,7 @@ VALUES (gen_random_uuid(), 'Molecular Biology and Genetics', 'd9254aa2-1e4e-4c16
 INSERT INTO department (id, name, faculty_id)
 VALUES ('5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 'Computer Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
-VALUES (gen_random_uuid(), 'Bioengineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
+VALUES ('5b8a3d25-2a7a-4683-89ed-ac0e42cdc123', 'Bioengineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'Environmental Engineering', '76ef51dd-ff39-4a3d-9dfd-c26d8f07d687');
 INSERT INTO department (id, name, faculty_id)
@@ -173,7 +173,7 @@ VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac901', 'Mahmut', 'Gümüş', 'mahmutgum
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac914', 'Murat', 'Bronz', 'muratbronz@std.iyte.edu.tr',
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'CANDIDATE', '00000000007', '000000007', 3.0,
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879');
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc123');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac915', 'Melis', 'Elmas', 'meliselmas@std.iyte.edu.tr',
@@ -184,48 +184,48 @@ VALUES ('7b8a3d25-2b7a-4683-89ed-ac0e42cac915', 'Melis', 'Elmas', 'meliselmas@st
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- FINISHED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800',
-        '2022-2023 Spring | Computer Engineering Department Representative Election',
+        '2022-2023 SPRING | Computer Engineering Department Representative Election',
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2022, '2023-5-14', '2023-5-15',
         true, '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878');
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- ONGOING ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801',
-        '2022-2023 Spring | Chemical Engineering Department Representative Election',
+        '2022-2023 SPRING | Chemical Engineering Department Representative Election',
         '5b8a3d25-2a7a-4683-89ed-ac0e42cdc987', 0, 2022, '2023-5-14', '2023-7-20',
         false, null);
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- ONGOING ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc834',
-        '2022-2023 Spring | Bioengineering Department Representative Election',
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879', 0, 2022, '2023-5-14', '2023-7-20',
+        '2022-2023 SPRING | Bioengineering Department Representative Election',
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc123', 0, 2022, '2023-5-14', '2023-7-20',
         false, null);
 
 INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- NOT STARTED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc802',
-        '2022-2023 Spring | Energy Systems Engineering Department Representative Election',
+        '2022-2023 SPRING | Energy Systems Engineering Department Representative Election',
         '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2022, '2023-7-03', '2023-7-04',
         false, null);
 
 ---------------------------------------------------------------------------------- Candidates of Election ----------------------------------------------------------------------------------
--- '2022-2023 Spring | Computer Engineering Department Representative Election' (FINISHED)
+-- '2022-2023 SPRING | Computer Engineering Department Representative Election' (FINISHED)
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc800', '5b8a3d25-2b7a-4683-89ed-ac0e42cdc878');
 
--- '2023-2024 Spring | Chemical Engineering Department Representative Election' (ONGOING)
+-- '2022-2023 SPRING | Chemical Engineering Department Representative Election' (ONGOING)
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42cac878');
 
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc801', '5b8a3d25-2b7a-4683-89ed-ac0e42cac879');
 
--- '2023-2024 Spring | Bioengineering Department Representative Election' (ONGOING)
+-- '2022-2023 SPRING | Bioengineering Department Representative Election' (ONGOING)
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc834', '7b8a3d25-2b7a-4683-89ed-ac0e42cac914');
 
--- '2023-2024 Spring | Energy Systems Engineering Department Representative Election' (NOT STARTED)
+-- '2022-2023 SPRING | Energy Systems Engineering Department Representative Election' (NOT STARTED)
 INSERT INTO election_candidates (election_id, candidates_id)
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc802', '7b8a3d25-2b7a-4683-89ed-ac0e42cac915');
 
