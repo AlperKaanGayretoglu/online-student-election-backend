@@ -2,6 +2,7 @@ package com.alpergayretoglu.online_student_election.controller;
 
 import com.alpergayretoglu.online_student_election.model.request.AnnouncementCreateRequest;
 import com.alpergayretoglu.online_student_election.model.response.AnnouncementResponse;
+import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
 import com.alpergayretoglu.online_student_election.service.AnnouncementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class AnnouncementController {
     }
 
     @PostMapping
-    public String addAnnouncement(@Valid @RequestBody AnnouncementCreateRequest request) {
+    public MessageResponse addAnnouncement(@Valid @RequestBody AnnouncementCreateRequest request) {
         return announcementService.addAnnouncement(request);
     }
 }

@@ -8,6 +8,7 @@ import com.alpergayretoglu.online_student_election.model.enums.UserRole;
 import com.alpergayretoglu.online_student_election.model.request.ElectionCreateRequest;
 import com.alpergayretoglu.online_student_election.model.request.ElectionUpdateRequest;
 import com.alpergayretoglu.online_student_election.model.request.VoteCastingRequest;
+import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
 import com.alpergayretoglu.online_student_election.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,11 +61,11 @@ public class ElectionService {
         return electionRepository.findAllByTermAndYear(Term.getCurrentTerm(), LocalDate.now().getYear());
     }
 
-    public String endElection(String electionId) {
+    public MessageResponse endElection(String electionId) {
         Election election = getElectionWithException(electionId);
 
         if (election.getIsFinished()) {
-            return ApplicationMessages.ELECTION_END_FAIL_ELECTION_ALREADY_FINISHED;
+            return new MessageResponse(ApplicationMessages.ELECTION_END_FAIL_ELECTION_ALREADY_FINISHED, false);
         }
 
         election.getCandidates().forEach(candidate -> {
@@ -92,10 +93,10 @@ public class ElectionService {
                 .build();
         announcementRepository.save(announcement);
 
-        return ApplicationMessages.ELECTION_END_SUCCESS;
+        return new MessageResponse(ApplicationMessages.ELECTION_END_SUCCESS, true);
     }
 
-    public String castVote(String voterId, VoteCastingRequest voteCastingRequest) {
+    public MessageResponse castVote(String voterId, VoteCastingRequest voteCastingRequest) {
         User voter = userRepository.findById(voterId).orElseThrow(() -> {
             throw new EntityNotFoundException();
         });
@@ -103,15 +104,15 @@ public class ElectionService {
         Election election = getElectionWithException(voteCastingRequest.getElectionId());
 
         if (election.getIsFinished()) {
-            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED;
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED, false);
         }
 
         if (election.getStartDate().isAfter(LocalDateTime.now())) {
-            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_NOT_STARTED;
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_NOT_STARTED, false);
         }
 
         if (election.getEndDate().isBefore(LocalDateTime.now())) {
-            return ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED;
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED, false);
         }
 
         User candidate = election.getCandidates().stream()
@@ -119,11 +120,11 @@ public class ElectionService {
                 .findFirst().orElse(null);
 
         if (election.getVotes().stream().anyMatch(vote -> vote.getVoter().getId().equals(voter.getId()))) {
-            return ApplicationMessages.VOTE_SUBMIT_FAIL_ALREADY_VOTED;
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_ALREADY_VOTED, false);
         }
 
         if (candidate == null) {
-            return ApplicationMessages.VOTE_SUBMIT_FAIL_INVALID_CANDIDATE;
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_INVALID_CANDIDATE, false);
         }
 
         Vote vote = Vote.builder()
@@ -137,7 +138,7 @@ public class ElectionService {
         election.addVote(vote);
         electionRepository.save(election);
 
-        return ApplicationMessages.VOTE_SUBMIT_SUCCESS;
+        return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_SUCCESS, true);
     }
 
     private Election getElectionWithException(String id) {

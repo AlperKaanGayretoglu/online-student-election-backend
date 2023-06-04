@@ -1,5 +1,6 @@
 package com.alpergayretoglu.online_student_election.controller;
 
+import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
 import com.alpergayretoglu.online_student_election.model.response.UserResponse;
 import com.alpergayretoglu.online_student_election.service.UserService;
 import lombok.AllArgsConstructor;
@@ -32,17 +33,17 @@ public class UserController {
     }
 
     @PostMapping("{userId}/apply-for-candidacy")
-    public String applyForCandidacy(@PathVariable String userId) {
+    public MessageResponse applyForCandidacy(@PathVariable String userId) {
         return userService.applyForCandidacy(userId);
     }
 
     @GetMapping("{userId}/checkout-application-status")
-    public String getApplicationStatus(@PathVariable String userId) {
+    public MessageResponse getApplicationStatus(@PathVariable String userId) {
         return userService.getApplicationStatus(userId);
     }
 
     @PutMapping("{userId}/withdraw-from-candidacy")
-    public String withdrawFromCandidacy(@PathVariable String userId) {
+    public MessageResponse withdrawFromCandidacy(@PathVariable String userId) {
         return userService.withdrawFromCandidacy(userId);
     }
 

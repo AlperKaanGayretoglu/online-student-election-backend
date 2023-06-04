@@ -7,6 +7,7 @@ import com.alpergayretoglu.online_student_election.model.entity.EdevletUser;
 import com.alpergayretoglu.online_student_election.model.entity.Election;
 import com.alpergayretoglu.online_student_election.model.entity.User;
 import com.alpergayretoglu.online_student_election.model.enums.UserRole;
+import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
 import com.alpergayretoglu.online_student_election.repository.CandidacyApplicationRepository;
 import com.alpergayretoglu.online_student_election.repository.ElectionRepository;
 import com.alpergayretoglu.online_student_election.repository.UserRepository;
@@ -39,7 +40,7 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public String applyForCandidacy(String userId) {
+    public MessageResponse applyForCandidacy(String userId) {
         User user = getUserWithException(userId);
 
         Election election = electionService.getAllUpcomingElections().stream()
@@ -70,7 +71,7 @@ public class UserService {
         candidacyApplicationRepository.save(candidacyApplication);
 
         if (!edevletUser.isEligible()) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS;
+            return new MessageResponse(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS, true);
         }
 
         user.setRole(UserRole.CANDIDATE);
@@ -78,7 +79,7 @@ public class UserService {
 
         election.addCandidate(user);
         electionRepository.save(election);
-        return ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS;
+        return new MessageResponse(ApplicationMessages.CANDIDATE_APPLICATION_SUBMIT_SUCCESS, true);
     }
 
     private User getUserWithException(String id) {
@@ -87,22 +88,22 @@ public class UserService {
         });
     }
 
-    public String getApplicationStatus(String userId) {
+    public MessageResponse getApplicationStatus(String userId) {
         User user = getUserWithException(userId);
 
         if (user.getRole() == UserRole.CANDIDATE) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_ACCEPTED;
+            return new MessageResponse(ApplicationMessages.CANDIDATE_APPLICATION_STATUS_ACCEPTED, true);
         }
 
         if (candidacyApplicationRepository.findAllByUser(user).stream().noneMatch(candidacyApplication -> candidacyApplication
                 .getApplicationDate().plusDays(3).isAfter(LocalDateTime.now()))) {
-            return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_NOT_SUBMITTED;
+            return new MessageResponse(ApplicationMessages.CANDIDATE_APPLICATION_STATUS_NOT_SUBMITTED, false);
         }
 
-        return ApplicationMessages.CANDIDATE_APPLICATION_STATUS_REJECTED;
+        return new MessageResponse(ApplicationMessages.CANDIDATE_APPLICATION_STATUS_REJECTED, false);
     }
 
-    public String withdrawFromCandidacy(String userId) {
+    public MessageResponse withdrawFromCandidacy(String userId) {
         User user = getUserWithException(userId);
 
         if (user.getRole() != UserRole.CANDIDATE) {
@@ -127,6 +128,6 @@ public class UserService {
         election.removeCandidate(user);
         electionRepository.save(election);
 
-        return ApplicationMessages.CANDIDATE_WITHDRAW_SUCCESS;
+        return new MessageResponse(ApplicationMessages.CANDIDATE_WITHDRAW_SUCCESS, true);
     }
 }

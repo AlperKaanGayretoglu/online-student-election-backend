@@ -3,6 +3,7 @@ package com.alpergayretoglu.online_student_election.service;
 import com.alpergayretoglu.online_student_election.constants.ApplicationMessages;
 import com.alpergayretoglu.online_student_election.model.entity.Announcement;
 import com.alpergayretoglu.online_student_election.model.request.AnnouncementCreateRequest;
+import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
 import com.alpergayretoglu.online_student_election.repository.AnnouncementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,9 @@ public class AnnouncementService {
         return announcements;
     }
 
-    public String addAnnouncement(AnnouncementCreateRequest request) {
+    public MessageResponse addAnnouncement(AnnouncementCreateRequest request) {
         announcementRepository.save(AnnouncementCreateRequest.toEntity(request));
-        return ApplicationMessages.ANNOUNCEMENT_ADD_SUCCESS;
+        return new MessageResponse(ApplicationMessages.ANNOUNCEMENT_ADD_SUCCESS, true);
     }
 
 }
