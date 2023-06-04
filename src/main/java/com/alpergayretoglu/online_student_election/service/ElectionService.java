@@ -154,12 +154,11 @@ public class ElectionService {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DEPARTMENT_NOT_FOUND);
         });
 
-        int year = request.getStartDate().getYear();
-
         Term term = Term.getTermOfDate(request.getStartDate());
+        int year = term.decideYear(request.getStartDate());
 
-        Election election = electionRepository.findByDepartmentAndTermAndYear(department, term, year).orElse(null);
-        if (election != null && !election.getIsFinished()) {
+        List<Election> elections = electionRepository.findAllByDepartmentAndTermAndYear(department, term, year);
+        if (!elections.isEmpty() && elections.stream().anyMatch(election -> !election.getIsFinished())) {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_ELECTION_ALREADY_EXISTS);
         }
     }

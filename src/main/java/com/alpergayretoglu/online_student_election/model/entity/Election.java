@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Election extends BaseEntity {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Setter(AccessLevel.NONE)
     private String name;
 
@@ -56,12 +56,8 @@ public class Election extends BaseEntity {
     @PrePersist
     public void prePersist() {
         this.term = decideTerm();
-        if (term == Term.FALL) {
-            this.year = getStartDate().getYear();
-        } else {
-            this.year = getStartDate().getYear() - 1;
-        }
-        this.name = year + "-" + (year + 1) + " " + term + " | " + department.getName() + " Representative Election";
+        this.year = term.decideYear(getStartDate());
+        this.name = year + "-" + (year + 1) + " " + term + " | " + department.getName() + " Department Representative Election";
     }
 
     public void addCandidate(User user) {
