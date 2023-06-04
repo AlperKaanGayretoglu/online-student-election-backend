@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/online_student_election}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:12345}
 
   jpa:
     hibernate:
@@ -19,7 +19,7 @@ spring:
       mode: always
 
 jwt:
-  secret: ${JWT_SECRET_KEY}
-  issuer: ${JWT_ISSUER}
+  secret: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5275}
+  issuer: ${JWT_ISSUER:OnlineStudentElection}
   expiration:
-    hours: ${JWT_EXPIRATION_HOURS}
+    hours: ${JWT_EXPIRATION_HOURS:10}
