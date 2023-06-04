@@ -56,7 +56,11 @@ public class Election extends BaseEntity {
     @PrePersist
     public void prePersist() {
         this.term = decideTerm();
-        this.year = getTerm().getStartDateForYear(getStartDate().getYear()).getYear();
+        if (term == Term.FALL) {
+            this.year = getStartDate().getYear();
+        } else {
+            this.year = getStartDate().getYear() - 1;
+        }
         this.name = year + "-" + (year + 1) + " " + term + " | " + department.getName() + " Representative Election";
     }
 
@@ -82,7 +86,7 @@ public class Election extends BaseEntity {
             if (voteCount == maxVoteCount && maxVoteCount != 0) {
                 return null;
             }
-            
+
             if (voteCount > maxVoteCount) {
                 maxVoteCount = voteCount;
                 winner = candidate;
