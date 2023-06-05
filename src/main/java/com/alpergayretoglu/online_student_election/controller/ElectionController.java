@@ -6,6 +6,7 @@ import com.alpergayretoglu.online_student_election.model.request.VoteCastingRequ
 import com.alpergayretoglu.online_student_election.model.response.ElectionResponse;
 import com.alpergayretoglu.online_student_election.model.response.ElectionResultResponse;
 import com.alpergayretoglu.online_student_election.model.response.MessageResponse;
+import com.alpergayretoglu.online_student_election.model.response.UserResponse;
 import com.alpergayretoglu.online_student_election.service.ElectionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,11 @@ public class ElectionController {
     @PutMapping("{electionId}/end")
     public MessageResponse endElection(@PathVariable String electionId) {
         return electionService.endElection(electionId);
+    }
+
+    @GetMapping("{electionId}/candidates")
+    public List<UserResponse> getCandidates(@PathVariable String electionId) {
+        return electionService.getCandidates(electionId).stream().map(UserResponse::fromEntity).collect(Collectors.toList());
     }
 
     @PostMapping("cast-vote/{voterId}")

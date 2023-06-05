@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,6 +60,11 @@ public class ElectionService {
 
     public List<Election> getAllElectionsForCurrentTerm() { // TODO: REMOVE THIS METHOD
         return electionRepository.findAllByTermAndYear(Term.getCurrentTerm(), LocalDate.now().getYear());
+    }
+
+    public List<User> getCandidates(String electionId) {
+        Election election = getElectionWithException(electionId);
+        return new ArrayList<>(election.getCandidates());
     }
 
     public MessageResponse endElection(String electionId) {
