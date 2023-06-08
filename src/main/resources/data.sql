@@ -45,8 +45,6 @@ VALUES (gen_random_uuid(), 'Materials Science and Engineering', '76ef51dd-ff39-4
 INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'Industrial Design', '3426ca98-7afd-481e-91e6-315046570bef');
 INSERT INTO department (id, name, faculty_id)
-VALUES (gen_random_uuid(), 'Conservation and Restoration Cultural Heritage', '3426ca98-7afd-481e-91e6-315046570bef');
-INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'Architecture', '3426ca98-7afd-481e-91e6-315046570bef');
 INSERT INTO department (id, name, faculty_id)
 VALUES (gen_random_uuid(), 'City and Regional Planning', '3426ca98-7afd-481e-91e6-315046570bef');
