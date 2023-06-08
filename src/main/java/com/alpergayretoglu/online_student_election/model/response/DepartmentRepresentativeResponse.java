@@ -10,4 +10,5 @@ import lombok.*;
 public class DepartmentRepresentativeResponse {
     private String departmentName;
     private String representativeNameSurname;
+    private String faculty;
 }

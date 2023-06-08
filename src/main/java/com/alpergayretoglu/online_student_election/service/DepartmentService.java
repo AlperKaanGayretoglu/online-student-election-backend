@@ -30,6 +30,7 @@ public class DepartmentService {
             return DepartmentRepresentativeResponse.builder()
                     .departmentName(department.getName())
                     .representativeNameSurname(representative == null ? null : department.getRepresentative().getName() + " " + department.getRepresentative().getSurname())
+                    .faculty(department.getFaculty().getName())
                     .build();
         })).collect(Collectors.toList());
     }
