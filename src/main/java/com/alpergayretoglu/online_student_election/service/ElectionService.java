@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +80,17 @@ public class ElectionService {
         });
 
         User winner = election.decideWinner();
+
+        election.getCandidates().clear();
         if (winner == null) {
+            election.setIsFinished(true);
+            electionRepository.save(election);
+            Announcement announcement = Announcement.builder()
+                    .title("The " + election.getName() + " election has ended.")
+                    .content("The winner could not be decided. So there will be a re-election.")
+                    .date(ZonedDateTime.now())
+                    .build();
+            announcementRepository.save(announcement);
             throw new RuntimeException(ApplicationMessages.ELECTION_END_FAIL_WINNER_CANNOT_BE_DECIDED);
         }
         winner.setRole(UserRole.REPRESENTATIVE);
@@ -95,7 +106,7 @@ public class ElectionService {
         Announcement announcement = Announcement.builder()
                 .title("The " + election.getName() + " election has ended.")
                 .content("The winner is " + winner.getName() + " " + winner.getSurname() + ".")
-                .date(LocalDateTime.now())
+                .date(ZonedDateTime.now())
                 .build();
         announcementRepository.save(announcement);
 
@@ -108,6 +119,11 @@ public class ElectionService {
         });
 
         Election election = getElectionWithException(voteCastingRequest.getElectionId());
+
+        // student and election department must be same
+        if (!voter.getDepartment().getId().equals(election.getDepartment().getId())) {
+            return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_DEPARTMENT_MISMATCH, false);
+        }
 
         if (election.getIsFinished()) {
             return new MessageResponse(ApplicationMessages.VOTE_SUBMIT_FAIL_ELECTION_FINISHED, false);
@@ -156,6 +172,8 @@ public class ElectionService {
     private void assertElectionCreateRequestIsValid(ElectionCreateRequest request) {
         assertDateIsValid(request.getStartDate(), request.getEndDate());
 
+        System.out.println(request.getStartDate() + " " + request.getEndDate());
+
         Department department = departmentRepository.findByName(request.getDepartmentName()).orElseThrow(() -> {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DEPARTMENT_NOT_FOUND);
         });
@@ -180,6 +198,10 @@ public class ElectionService {
 
         if (startDate.isBefore(LocalDateTime.now())) {
             throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_START_DATE_BEFORE_CURRENT_DATE);
+        }
+
+        if (startDate.plusDays(1).isAfter(endDate)) {
+            throw new RuntimeException(ApplicationMessages.ELECTION_CREATE_FAIL_DATES_TOO_CLOSE);
         }
 
         Term term = Term.getTermOfDate(startDate);
