@@ -115,6 +115,10 @@ public class UserService {
                 .findFirst().orElse(null);
 
         if (election == null) {
+            if (electionService.getAllOngoingElections().stream()
+                    .anyMatch(elect -> elect.getCandidates().stream().anyMatch(cand -> cand.getId().equals(user.getId())))) {
+                throw new EntityNotFoundException(ApplicationMessages.CANDIDATE_WITHDRAW_FAIL_ELECTION_STARTED);
+            }
             throw new EntityNotFoundException("User is a candidate but no election found for him/her.");
         }
 
