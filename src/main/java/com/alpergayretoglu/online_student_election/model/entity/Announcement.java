@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -21,6 +21,6 @@ public class Announcement extends BaseEntity {
     private String content;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private ZonedDateTime date;
 
 }

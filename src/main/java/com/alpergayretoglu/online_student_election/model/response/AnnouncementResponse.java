@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @Builder
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class AnnouncementResponse {
     private String title;
     private String content;
-    private LocalDateTime date;
+    private ZonedDateTime date;
 
     public static AnnouncementResponse fromEntity(Announcement announcement) {
         return AnnouncementResponse.builder()

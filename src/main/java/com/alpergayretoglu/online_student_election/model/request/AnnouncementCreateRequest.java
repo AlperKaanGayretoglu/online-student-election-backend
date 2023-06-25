@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Builder
 @Getter
@@ -18,7 +18,7 @@ public class AnnouncementCreateRequest {
         return Announcement.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .date(LocalDateTime.now())
+                .date(ZonedDateTime.now())
                 .build();
     }
 }
