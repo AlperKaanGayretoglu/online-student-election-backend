@@ -44,10 +44,11 @@ public class ApplicationMessages {
     public static final String ELECTION_CREATE_FAIL_DEPARTMENT_NOT_FOUND = "Department not found";
     public static final String ELECTION_CREATE_FAIL_DATE_OUT_OF_RANGE = "The given date is out of the range of the term dates";
     public static final String ELECTION_CREATE_FAIL_ELECTION_ALREADY_EXISTS = "There is already a running election for this term and department";
+    public static final String ELECTION_CREATE_FAIL_DATES_TOO_CLOSE = "There should be at least 1 days between the start and end dates of an election";
 
 
     public static final String ELECTION_END_FAIL_ELECTION_ALREADY_FINISHED = "This election has already finished";
-    public static final String ELECTION_END_FAIL_WINNER_CANNOT_BE_DECIDED = "Can't end election because winner cannot be decided";
+    public static final String ELECTION_END_FAIL_WINNER_CANNOT_BE_DECIDED = "Election has ended but a winner cannot be decided, so a re-election is necessary";
 
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_NO_ELECTION = "There is no election for your department yet.";
     public static final String CANDIDATE_APPLICATION_SUBMIT_FAIL_ALREADY_CANDIDATE = "You are already a candidate.";
@@ -60,6 +61,8 @@ public class ApplicationMessages {
     public static final String VOTE_SUBMIT_FAIL_INVALID_CANDIDATE = "The candidate you have chosen is not valid";
     public static final String VOTE_SUBMIT_FAIL_ELECTION_FINISHED = "The election has already finished";
     public static final String VOTE_SUBMIT_FAIL_ELECTION_NOT_STARTED = "The election has not started yet";
+    public static final String VOTE_SUBMIT_FAIL_DEPARTMENT_MISMATCH = "You can only vote for elections that are for your department";
+
 
     public static final String CANDIDATE_WITHDRAW_FAIL_NOT_CANDIDATE = "You are not a candidate";
     public static final String CANDIDATE_WITHDRAW_FAIL_ELECTION_STARTED = "The election has already started";
