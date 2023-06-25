@@ -146,7 +146,7 @@ VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc878', 'Tuğçe', 'Türkmenler', 'tugce
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cdc879', 'Kerem Yavuz', 'Şenyurt', 'keremsenyurt@std.iyte.edu.tr',
         '$2a$10$0O6EQhphylcVjjrcu0OTMehTmHZsOdJhgxfCofE3CYWO8zOjN8eg2', 'VOTER', '00000000002', '290201100', 4.0,
-        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc879');
+        '5b8a3d25-2a7a-4683-89ed-ac0e42cdc123');
 
 INSERT INTO users (id, name, surname, email, password, role, tc_no, student_no, gpa, department_id)
 VALUES ('5b8a3d25-2b7a-4683-89ed-ac0e42cac878', 'Aylin', 'Kocaman', 'aylinkocaman@std.iyte.edu.tr',
