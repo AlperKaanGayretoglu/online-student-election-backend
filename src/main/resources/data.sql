@@ -204,7 +204,7 @@ INSERT INTO election (id, name, department_id, term, year, start_date, end_date,
                       is_finished, winner_id) -- NOT STARTED ELECTION
 VALUES ('5b8a3d25-2b7a-4683-89ab-ac0e42cdc802',
         '2022-2023 SPRING | Energy Systems Engineering Department Representative Election',
-        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2022, '2023-7-03', '2023-7-04',
+        '5b8b3d25-2a7a-4683-89ed-ac0e42cdc911', 0, 2022, '2023-7-13', '2023-7-14',
         false, null);
 
 ---------------------------------------------------------------------------------- Candidates of Election ----------------------------------------------------------------------------------
